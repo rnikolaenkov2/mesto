@@ -11,3 +11,16 @@
   border: 1px solid #fff;
   box-sizing: border-box;
 }
+
+@media screen and (min-width: 400px) {
+  .profile__btn-add-img {
+    max-width: 362px;
+  }
+}
+
+@media screen and (min-width: 620px) {
+  .profile__btn-add-img {
+    max-width: 150px;
+    margin-left: auto;
+  }
+}

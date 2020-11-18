@@ -4,3 +4,11 @@
   width: 282px;
   padding-top: 49px;
 }
+
+@media screen and (min-width: 1280px) {
+  .popup__container {
+    width: 430px;
+    padding: 49px;
+    position: relative;
+  }
+}

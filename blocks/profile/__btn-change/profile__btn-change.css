@@ -6,6 +6,13 @@
   background-position: center;
   background-size: contain;
   border: none;
-  top: 10px;
+  top: 35px;
   right: 0;
+}
+
+@media screen and (min-width: 1280px) {
+  .profile__btn-change {
+    width: 24px;
+    height: 24px;
+  }
 }

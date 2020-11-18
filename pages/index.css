@@ -3,6 +3,7 @@
 
 /* root */
 @import url('../blocks/root/root.css');
+@import url('../blocks/root/__header/root__header.css');
 @import url('../blocks/root/__link/root__link.css');
 @import url('../blocks/root/__section/root__section.css');
 @import url('../blocks/root/__cards/root__cards.css');
@@ -16,11 +17,15 @@
 
 /* profile */
 @import url('../blocks/profile/profile.css');
+@import url('../blocks/profile/__info/profile__info.css');
 @import url('../blocks/profile/__avatar/profile__avatar.css');
 @import url('../blocks/profile/__name/profile__name.css');
 @import url('../blocks/profile/__btn-change/profile__btn-change.css');
 @import url('../blocks/profile/__role/profile__role.css');
 @import url('../blocks/profile/__btn-add-img/profile__btn-add-img.css');
+
+/* cards */
+@import url('../blocks/cards/cards.css');
 
 /* places */
 @import url('../blocks/places/places.css');
@@ -29,6 +34,9 @@
 @import url('../blocks/places/__title-wrap/places__title-wrap.css');
 @import url('../blocks/places/__title/places__title.css');
 @import url('../blocks/places/__like/places__like.css');
+
+/* footer */
+@import url('../blocks/footer/footer.css');
 
 /* copyright */
 @import url('../blocks/copyright/copyright.css');

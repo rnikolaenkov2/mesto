@@ -14,3 +14,11 @@
   color: #FFFFFF;
   margin-top: 45px;
 }
+
+@media screen and (min-width: 1280px) {
+  .popup__btn-save {
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 50px;
+  }
+}
