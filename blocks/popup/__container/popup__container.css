@@ -3,6 +3,8 @@
   flex-direction: column;
   width: 282px;
   padding-top: 49px;
+  /* border: 1px solid red;
+  box-sizing: border-box; */
 }
 
 @media screen and (min-width: 1280px) {
