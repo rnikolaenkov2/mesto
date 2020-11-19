@@ -12,7 +12,7 @@
   line-height: 17px;
   text-align: center;
   color: #FFFFFF;
-  margin-top: 45px;
+  margin-top: 50px;
   border: none;
 }
 
@@ -20,6 +20,5 @@
   .popup__btn-save {
     font-size: 18px;
     line-height: 22px;
-    margin-top: 50px;
   }
 }

@@ -1,9 +1,3 @@
-.popup__input_func_name {
-  margin-top: 75px;
-}
 
-@media screen and (min-width: 1280px) {
-  .popup__input_func_name {
-    margin-top: 50px;
-  }
-}
+
+
