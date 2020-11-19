@@ -13,6 +13,7 @@
   text-align: center;
   color: #FFFFFF;
   margin-top: 45px;
+  border: none;
 }
 
 @media screen and (min-width: 1280px) {
