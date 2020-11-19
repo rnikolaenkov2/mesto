@@ -21,9 +21,6 @@ function closeForm() {
   popup.classList.remove('popup_opened');
 }
 
-btnProfileChange.addEventListener('click', openForm);
-btnPopupClose.addEventListener('click', closeForm);
-
 function formSubmitHandler (evt) {
   evt.preventDefault();
 
@@ -33,4 +30,6 @@ function formSubmitHandler (evt) {
    closeForm();
 }
 
+btnProfileChange.addEventListener('click', openForm);
+btnPopupClose.addEventListener('click', closeForm);
 formElement.addEventListener('submit', formSubmitHandler);
