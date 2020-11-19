@@ -1,5 +1,5 @@
 .profile__info {
-  /* padding: 0 28px; */
+  max-width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -8,6 +8,7 @@
 
 @media screen and (min-width: 620px) {
   .profile__info {
+    max-width: 500px;
     padding: 0 28px;
   }
 }
