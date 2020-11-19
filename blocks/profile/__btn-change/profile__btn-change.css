@@ -1,18 +1,19 @@
 .profile__btn-change {
-  position: absolute;
   background: url('../../../images/edit-btn.png') #000;
+  background-repeat: no-repeat;
   width: 18px;
   height: 18px;
   background-position: center;
   background-size: contain;
   border: none;
-  top: 35px;
-  right: 0;
+  margin-left: 20px;
+  margin-top: 10px;
 }
 
 @media screen and (min-width: 1280px) {
   .profile__btn-change {
-    width: 24px;
-    height: 24px;
+    width: 25px;
+    height: 25px;
+    margin-top: 34px;
   }
 }
