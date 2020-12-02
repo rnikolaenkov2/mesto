@@ -58,18 +58,29 @@ function init(cards) {
 function addCard(cardTemplate, name, link) {
     const cardElement = cardTemplate.cloneNode(true);
     const img = cardElement.querySelector('.places__img');
-    cardElement.querySelector('.places__remove').addEventListener('click', (event) => {
-      deleteCard(event.target.closest('.places__card'));
-    });
+    const like = cardElement.querySelector('.places__like');
+
     img.setAttribute('src', link);
     img.setAttribute('alt', name);
     cardElement.querySelector('.places__title').textContent = name;
+
+    cardElement.querySelector('.places__remove').addEventListener('click', (event) => {
+      deleteCard(event.target.closest('.places__card'));
+    });
+
+    like.addEventListener('click', (event) => {
+      toggleLike(event.target);
+    });
 
     places.prepend(cardElement);
 }
 
 function deleteCard (element) {
   element.remove();
+}
+
+function toggleLike(element) {
+  element.classList.toggle('places__like_active');
 }
 
 //открытие попапа
