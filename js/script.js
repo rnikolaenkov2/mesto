@@ -24,57 +24,106 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-
 const root = document.querySelector('.root');
-const popup = root.querySelector('.popup');
-const formElement = popup.querySelector('.popup__form');
-const btnProfileChange = root.querySelector('.profile__btn-change');
-const btnPopupClose = popup.querySelector('.popup__btn-close');
-const nameInput = formElement.querySelector('.popup__input_func_name');
-const jobInput = formElement.querySelector('.popup__input_func_role');
+const places = root.querySelector('.places');
+const cardTemplate = root.querySelector('#card').content;
+
 const name = root.querySelector('.profile__name');
 const job = root.querySelector('.profile__role');
-const cardTemplate = root.querySelector('#card').content;
-const places = root.querySelector('.places');
 
+const popupEditProfile = root.querySelector('.popup_edit-profile');
+const popupAddCard = root.querySelector('.popup_add-card');
+const btnProfileChange = root.querySelector('.profile__btn-change');
+const btnPopupClose = root.querySelectorAll('.popup__btn-close');
+const btnAddCard = root.querySelector('.profile__btn-add-img');
+const btnRemoveCard = root.querySelectorAll('.places__remove');
 
+const formEditProfile = popupEditProfile.querySelector('.popup__form');
+const profileName = formEditProfile.querySelector('.popup__input_func_name');
+const profileJob = formEditProfile.querySelector('.popup__input_func_role');
+
+const formAddCard = popupAddCard.querySelector('.popup__form');
+const cardName = formAddCard.querySelector('.popup__input_name');
+const cardLink = formAddCard.querySelector('.popup__input_link');
 
 init(initialCards);
 
 //инициализация карточек
 function init(cards) {
   cards.forEach((card) => {
-    let cardElement = cardTemplate.cloneNode(true);
-    console.log(cardElement.querySelector('.places__img'));
-    cardElement.querySelector('.places__img').setAttribute('src', card.link);
-    cardElement.querySelector('.places__title').textContent = card.name;
-    places.prepend(cardElement);
+    addCard(cardTemplate, card.name, card.link);
   });
 }
 
+function addCard(cardTemplate, name, link) {
+    const cardElement = cardTemplate.cloneNode(true);
+    const img = cardElement.querySelector('.places__img');
+    cardElement.querySelector('.places__remove').addEventListener('click', (event) => {
+      deleteCard(event.target.closest('.places__card'));
+    });
+    img.setAttribute('src', link);
+    img.setAttribute('alt', name);
+    cardElement.querySelector('.places__title').textContent = name;
+
+    places.prepend(cardElement);
+}
+
+function deleteCard (element) {
+  element.remove();
+}
+
 //открытие попапа
-function openForm() {
-  nameInput.value = name.textContent.trim();
-  jobInput.value = job.textContent.trim();
+function openForm(popup) {
+  profileName.value = name.textContent.trim();
+  profileJob.value = job.textContent.trim();
 
   popup.classList.add('popup_opened');
 }
 
 //закрытие попапа
-function closeForm() {
+function closeForm(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function formSubmitHandler (evt) {
+function formEditProfileSubmitHandler (evt) {
   evt.preventDefault();
 
-   name.textContent = nameInput.value;
-   job.textContent = jobInput.value;
+   name.textContent = profileName.value;
+   job.textContent = profileJob.value;
 
-   closeForm();
+   closeForm(popupEditProfile);
 }
 
-btnProfileChange.addEventListener('click', openForm);
-btnPopupClose.addEventListener('click', closeForm);
-formElement.addEventListener('submit', formSubmitHandler);
+function formAddCardSubmitHandler (evt) {
+  evt.preventDefault();
+  let name = 'No name';
+  let link = './images/no-image.jpg';
+  if (cardName.value !== '') {
+    name = cardName.value;
+  }
+
+  if (cardLink.value !== '') {
+    link = cardLink.value;
+  }
+
+  addCard(cardTemplate, name, link);
+  closeForm(popupAddCard);
+}
+
+btnProfileChange.addEventListener('click', () => {
+  openForm(popupEditProfile);
+});
+
+btnPopupClose.forEach( (item) => {
+  item.addEventListener('click', (evt) => {
+  closeForm(evt.target.closest('.popup'))
+  });
+});
+
+popupEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
+
+btnAddCard.addEventListener('click', () => {
+  openForm(popupAddCard);
+});
+
+popupAddCard.addEventListener('submit', formAddCardSubmitHandler);

@@ -47,7 +47,7 @@
 <!-- footer end -->
 
 <!-- modal -->
-<div class="popup">
+<div class="popup popup_edit-profile">
   <div class="popup__container">
     <button type="button" class="popup__btn-close root__link" aria-label="закрыть попап"></button>
     <div class="popup__content">
@@ -55,6 +55,20 @@
       <form action="#" class="popup__form" name="form-change-profile">
         <input type="text" class="popup__input popup__input_func_name" aria-label="имя" value="" name="name">
         <input type="text" class="popup__input popup__input_func_role" aria-label="роль" value="" name="role">
+        <button type="submit" class="popup__btn-save root__link">Сохранить</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="popup popup_add-card">
+  <div class="popup__container">
+    <button type="button" class="popup__btn-close root__link" aria-label="закрыть попап"></button>
+    <div class="popup__content">
+      <h2 class="popup__title">Новое место</h2>
+      <form action="#" class="popup__form" name="form-new-card">
+        <input type="text" class="popup__input popup__input_name" aria-label="имя" value="" name="name" placeholder="Название">
+        <input type="text" class="popup__input popup__input_link" aria-label="ссылка" value="" name="role" placeholder="Ссылка на картинку">
         <button type="submit" class="popup__btn-save root__link">Сохранить</button>
       </form>
     </div>
