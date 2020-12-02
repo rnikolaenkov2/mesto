@@ -36,51 +36,7 @@
 
   <!-- cards -->
   <section class="cards root__section root__cards">
-    <ul class="places">
-      <li class="places__card">
-        <button type="button" class="places__remove root__link"></button>
-        <img src="./images/kirill-pershin.jpg" alt="Карачаево-Черкесия" class="places__img">
-        <div class="places__title-wrap">
-          <h2 class="places__title">Карачаево-Черкесия</h2>
-          <button type="button" class="places__like root__link"></button>
-        </div>
-      </li>
-      <li class="places__card">
-        <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="places__img">
-        <div class="places__title-wrap">
-          <h2 class="places__title">Гора Эльбрус</h2>
-          <button type="button" class="places__like root__link"></button>
-        </div>
-      </li>
-      <li class="places__card">
-        <img src="./images/dombay.jpg" alt="Домбай" class="places__img">
-        <div class="places__title-wrap">
-          <h2 class="places__title">Домбай</h2>
-          <button type="button" class="places__like root__link"></button>
-        </div>
-      </li>
-      <li class="places__card">
-        <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="places__img">
-        <div class="places__title-wrap">
-          <h2 class="places__title">Гора Эльбрус</h2>
-          <button type="button" class="places__like root__link"></button>
-        </div>
-      </li>
-      <li class="places__card">
-        <img src="./images/dombay.jpg" alt="Домбай" class="places__img">
-        <div class="places__title-wrap">
-          <h2 class="places__title">Домбай</h2>
-          <button type="button" class="places__like root__link"></button>
-        </div>
-      </li>
-      <li class="places__card">
-        <img src="./images/kirill-pershin.jpg" alt="Карачаево-Черкесия" class="places__img">
-        <div class="places__title-wrap">
-          <h2 class="places__title">Карачаево-Черкесия</h2>
-          <button type="button" class="places__like root__link"></button>
-        </div>
-      </li>
-    </ul>
+    <ul class="places"></ul>
   </section>
   <!-- end cards -->
 </main>
@@ -105,6 +61,20 @@
   </div>
 </div>
 <!-- end modal -->
+
+<!-- template for card -->
+<template id="card">
+  <li class="places__card">
+    <button type="button" class="places__remove root__link"></button>
+    <img src="" alt="" class="places__img">
+    <div class="places__title-wrap">
+      <h2 class="places__title"></h2>
+      <button type="button" class="places__like root__link"></button>
+    </div>
+  </li>
+</template>
+<!-- end template for card -->
+
 <script src="./js/script.js"></script>
 </body>
 </html>
