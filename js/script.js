@@ -75,9 +75,11 @@ function addCard(cardTemplate, name, link) {
     });
 
     img.addEventListener('click', (event) => {
-      console.log(event.target);
-      popupPhoto.querySelector('.popup__photo').setAttribute('src', event.target.getAttribute('src'));
-      // root.querySelector('.popup__title').before(event.target);
+      let img = popupPhoto.querySelector('.popup__photo');
+      let name = event.target.getAttribute('alt');
+      img.setAttribute('src', event.target.getAttribute('src'));
+      img.setAttribute('alt', name);
+      popupPhoto.querySelector('.popup__title').textContent = name;
       openForm(popupPhoto);
     });
 
@@ -102,6 +104,10 @@ function openForm(popup) {
 
 //закрытие попапа
 function closeForm(popup) {
+  let inputs = popup.querySelectorAll('.popup__input');
+  inputs.forEach((input) => {
+    input.value = '';
+  });
   popup.classList.remove('popup_opened');
 }
 
