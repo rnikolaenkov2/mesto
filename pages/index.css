@@ -46,11 +46,17 @@
 
 /* popup */
 @import url('../blocks/popup/popup.css');
+@import url('../blocks/popup/_theme/tehme_popup_photo.css');
 @import url('../blocks/popup/__container/popup__container.css');
+@import url('../blocks/popup/__container/_theme/popup__container_theme_form.css');
+@import url('../blocks/popup/__container/_theme/popup__container_theme_photo.css');
 @import url('../blocks/popup/__content/popup__content.css');
 @import url('../blocks/popup/__btn-close/popup__btn-close.css');
+@import url('../blocks/popup/__btn-close/_theme/popup__btn-close_theme_photo.css');
 @import url('../blocks/popup/__title/popup__title.css');
+@import url('../blocks/popup/__title/_theme/popup__title_theme_photo.css');
 @import url('../blocks/popup/__input/popup__input.css');
 @import url('../blocks/popup/__btn-save/popup__btn-save.css');
 @import url('../blocks/popup/_opened/popup_opened.css');
+@import url('../blocks/popup/__photo/popup__photo.css');
 

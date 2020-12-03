@@ -33,6 +33,7 @@ const job = root.querySelector('.profile__role');
 
 const popupEditProfile = root.querySelector('.popup_edit-profile');
 const popupAddCard = root.querySelector('.popup_add-card');
+const popupPhoto = root.querySelector('.popup_theme_photo');
 const btnProfileChange = root.querySelector('.profile__btn-change');
 const btnPopupClose = root.querySelectorAll('.popup__btn-close');
 const btnAddCard = root.querySelector('.profile__btn-add-img');
@@ -45,6 +46,7 @@ const profileJob = formEditProfile.querySelector('.popup__input_func_role');
 const formAddCard = popupAddCard.querySelector('.popup__form');
 const cardName = formAddCard.querySelector('.popup__input_name');
 const cardLink = formAddCard.querySelector('.popup__input_link');
+
 
 init(initialCards);
 
@@ -70,6 +72,13 @@ function addCard(cardTemplate, name, link) {
 
     like.addEventListener('click', (event) => {
       toggleLike(event.target);
+    });
+
+    img.addEventListener('click', (event) => {
+      console.log(event.target);
+      popupPhoto.querySelector('.popup__photo').setAttribute('src', event.target.getAttribute('src'));
+      // root.querySelector('.popup__title').before(event.target);
+      openForm(popupPhoto);
     });
 
     places.prepend(cardElement);
