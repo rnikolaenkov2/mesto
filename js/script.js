@@ -58,7 +58,6 @@ function init(cards) {
 }
 
 function createCard(cardTemplate, name, link) {
-  console.log(link);
   const cardElement = cardTemplate.cloneNode(true);
   const img = cardElement.querySelector('.places__img');
   const like = cardElement.querySelector('.places__like');
@@ -110,11 +109,14 @@ function setInputEditProfileForm() {
 
 //закрытие попапа
 function closeForm(popup) {
+  popup.classList.remove('popup_opened');
+}
+
+function clearInputInPopup(popup) {
   let inputs = popup.querySelectorAll('.popup__input');
   inputs.forEach((input) => {
     input.value = '';
   });
-  popup.classList.remove('popup_opened');
 }
 
 function formEditProfileSubmitHandler(evt) {
@@ -140,6 +142,7 @@ function formAddCardSubmitHandler(evt) {
 
   const cardElement = createCard(cardTemplate, name, link);
   addCard(cardElement);
+  clearInputInPopup(popupAddCard);
   closeForm(popupAddCard);
 }
 
@@ -149,8 +152,13 @@ btnProfileChange.addEventListener('click', () => {
 });
 
 btnPopupCloseList.forEach((item) => {
+
   item.addEventListener('click', (evt) => {
-    closeForm(evt.target.closest('.popup'))
+    let el = evt.target.closest('.popup')
+    if (!el.classList.contains('popup popup_theme_photo')) {
+      clearInputInPopup(el);
+    }
+    closeForm(el);
   });
 });
 
