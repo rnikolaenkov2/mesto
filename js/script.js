@@ -35,7 +35,7 @@ const popupEditProfile = root.querySelector('.popup_edit-profile');
 const popupAddCard = root.querySelector('.popup_add-card');
 const popupPhoto = root.querySelector('.popup_theme_photo');
 const btnProfileChange = root.querySelector('.profile__btn-change');
-const btnPopupClose = root.querySelectorAll('.popup__btn-close');
+const btnPopupCloseList = root.querySelectorAll('.popup__btn-close');
 const btnAddCard = root.querySelector('.profile__btn-add-img');
 const btnRemoveCard = root.querySelectorAll('.places__remove');
 
@@ -140,7 +140,7 @@ btnProfileChange.addEventListener('click', () => {
   openForm(popupEditProfile);
 });
 
-btnPopupClose.forEach( (item) => {
+btnPopupCloseList.forEach( (item) => {
   item.addEventListener('click', (evt) => {
   closeForm(evt.target.closest('.popup'))
   });
