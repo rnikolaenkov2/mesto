@@ -37,7 +37,6 @@ const popupPhoto = root.querySelector('.popup_theme_photo');
 const btnProfileChange = root.querySelector('.profile__btn-change');
 const btnPopupCloseList = root.querySelectorAll('.popup__btn-close');
 const btnAddCard = root.querySelector('.profile__btn-add-img');
-const btnRemoveCard = root.querySelectorAll('.places__remove');
 
 const formEditProfile = popupEditProfile.querySelector('.popup__form');
 const profileName = formEditProfile.querySelector('.popup__input_func_name');
