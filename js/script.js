@@ -52,11 +52,12 @@ init(initialCards);
 //инициализация карточек
 function init(cards) {
   cards.forEach((card) => {
-    addCard(cardTemplate, card.name, card.link);
+    let cardElement = createCard(cardTemplate, card.name, card.link);
+    addCard(cardElement);
   });
 }
 
-function addCard(cardTemplate, name, link) {
+function createCard(cardTemplate, name, link) {
   console.log(link);
   const cardElement = cardTemplate.cloneNode(true);
   const img = cardElement.querySelector('.places__img');
@@ -82,6 +83,10 @@ function addCard(cardTemplate, name, link) {
     openForm(popupPhoto);
   });
 
+  return cardElement;
+}
+
+function addCard(cardElement) {
   places.prepend(cardElement);
 }
 
@@ -131,7 +136,8 @@ function formAddCardSubmitHandler(evt) {
     link = cardLink.value;
   }
 
-  addCard(cardTemplate, name, link);
+  const cardElement = createCard(cardTemplate, name, link);
+  addCard(cardElement);
   closeForm(popupAddCard);
 }
 
