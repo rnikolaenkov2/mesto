@@ -100,10 +100,12 @@ function toggleLike(element) {
 
 //открытие попапа
 function openForm(popup) {
+  popup.classList.add('popup_opened');
+}
+
+function setInputEditProfileForm() {
   profileName.value = name.textContent.trim();
   profileJob.value = job.textContent.trim();
-
-  popup.classList.add('popup_opened');
 }
 
 //закрытие попапа
@@ -142,6 +144,7 @@ function formAddCardSubmitHandler(evt) {
 }
 
 btnProfileChange.addEventListener('click', () => {
+  setInputEditProfileForm(popupEditProfile)
   openForm(popupEditProfile);
 });
 
