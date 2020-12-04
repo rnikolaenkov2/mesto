@@ -74,8 +74,8 @@ function addCard(cardTemplate, name, link) {
     });
 
     img.addEventListener('click', (event) => {
-      let img = popupPhoto.querySelector('.popup__photo');
-      let name = event.target.getAttribute('alt');
+      const img = popupPhoto.querySelector('.popup__photo');
+      const name = event.target.getAttribute('alt');
       img.setAttribute('src', event.target.getAttribute('src'));
       img.setAttribute('alt', name);
       popupPhoto.querySelector('.popup__title').textContent = name;
