@@ -100,6 +100,11 @@ function toggleLike(element) {
 //открытие попапа
 function openForm(popup) {
   popup.classList.add('popup_opened');
+  const formEl = popup.querySelector('.popup__form');
+  const inputList = formEl.querySelectorAll('.popup__input');
+  Array.from(inputList).forEach((inputEl) => {
+    isValid(formEl, inputEl, inputEl.validationMessage);
+  })
 }
 
 function setInputEditProfileForm() {

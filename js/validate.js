@@ -24,38 +24,67 @@ const hideErrorMsg = (form, inputElement) => {
   errorElement.textContent = '';
 }
 
-const hasInvalidInput = (inputList) => {
-  return inputList.some((el) => {
-    return !el.validity.valid;
-  });
+const isValid = (formEl, inputEl, errorMsg) => {
+  if (inputEl.validity.valid) {
+    hideErrorMsg(formEl, inputEl, errorMsg);
+  } else {
+    showErrorMsg(formEl, inputEl, errorMsg);
+  }
 }
 
-const isValid = (inputEl) => {
-  return inputEl.validity.valid;
-}
 
-const setListeners = (formList) => {
-  Array.from(formList).forEach((form) => {
-    const inputList = form.querySelectorAll('.popup__input');
-    Array.from(inputList).forEach((inputEl) => {
-      inputEl.addEventListener('input', () => {
-        if(isValid(inputEl)) {
-          hideErrorMsg(form, inputEl, inputEl.validationMessage);
-        } else {
-          showErrorMsg(form, inputEl, inputEl.validationMessage);
-        }
-      })
-    })
-  });
-}
 
+const formEl = document.querySelector('.popup__form');
+const inputList  = formEl.querySelectorAll('.popup__input');
+Array.from(inputList).forEach((inputEl) => {
+  const errorMsg = inputEl.validateMessage;
+
+});
+console.log(formEl);
+
+// const hasInvalidInput = (inputList) => {
+//   return inputList.some((el) => {
+//     return !el.validity.valid;
+//   });
+// }
+
+// const isValid = (form, inputEl) => {
+//   // console.log(form);
+//   console.log(inputEl.validity.valid);
+//   if(inputEl.validity.valid) {
+//     hideErrorMsg(form, inputEl, inputEl.validationMessage);
+//   } else {
+//     showErrorMsg(form, inputEl, inputEl.validationMessage);
+//   }
+// }
+
+// const setListeners = (form, ) => {
+//   Array.from(formList).forEach((form) => {
+//     const inputList = form.querySelectorAll('.popup__input');
+//     Array.from(inputList).forEach((inputEl) => {
+//       inputEl.addEventListener('input', isValid(form, inputEl));
+//     })
+//   });
+// }
+
+// const enableValidation = () => {
+//   const formList = document.querySelectorAll('.popup__form');
+//   Array.from(formList).forEach((form) => {
+//     const inputList = form.querySelectorAll('.popup__input');
+//     Array.from(inputList).forEach((inputEl) => {
+//       isValid(form, inputEl);
+//     })
+//   })
+//   console.log(formList);
+//   // setListeners(formList);
+// }
 
 /* test */
-const form = document.querySelectorAll('.popup__form');
-const el = document.querySelector('#profile-name');
+
+// const el = document.querySelector('#profile-name');
 // const inputList = form.querySelector('.popup__input');
 
-setListeners(form);
+// enableValidation();
 
 // inputList.addEventListener('input', (e) => {
 //   console.log(inputList.validity.valid);
