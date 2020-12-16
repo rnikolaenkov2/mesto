@@ -27,7 +27,7 @@
         <button type="button" class="profile__btn-change root__link" aria-label="редактирование профиля"></button>
       </div>
       <p class="profile__role">
-        Исследователь океана
+<!--        Исследователь океана-->
       </p>
     </div>
     <button type="button" class="profile__btn-add-img root__link" aria-label="добавление места"></button>
@@ -53,8 +53,10 @@
     <div class="popup__content">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form action="#" class="popup__form" name="form-change-profile">
-        <input type="text" class="popup__input popup__input_func_name" aria-label="имя" value="" name="name">
-        <input type="text" class="popup__input popup__input_func_role" aria-label="роль" value="" name="role">
+        <input type="text" class="popup__input popup__input_func_name" aria-label="имя" value="" name="name" id="profile-name" required minlength="2" maxlength="40">
+        <span class="popup__error profile-name-error">Вы пропустили это поле</span>
+        <input type="text" class="popup__input popup__input_func_role" aria-label="роль" value="" name="role" id="profile-role" required minlength="2" maxlength="200">
+        <span class="popup__error profile-role-error">Вы пропустили это поле</span>
         <button type="submit" class="popup__btn-save root__link">Сохранить</button>
       </form>
     </div>
@@ -67,8 +69,10 @@
     <div class="popup__content">
       <h2 class="popup__title">Новое место</h2>
       <form action="#" class="popup__form" name="form-new-card">
-        <input type="text" class="popup__input popup__input_name" aria-label="имя" value="" name="name" placeholder="Название">
-        <input type="text" class="popup__input popup__input_link" aria-label="ссылка" value="" name="role" placeholder="Ссылка на картинку">
+        <input type="text" class="popup__input popup__input_name" aria-label="имя" value="" name="name" placeholder="Название" id="new-card-name" required minlength="2" maxlength="30">
+        <span class="popup__error new-card-name-error">Вы пропустили это поле</span>
+        <input type="url" class="popup__input popup__input_link" aria-label="ссылка" value="" name="role" placeholder="Ссылка на картинку" id="new-card-link" required>
+        <span class="popup__error new-card-link-error">Вы пропустили это поле</span>
         <button type="submit" class="popup__btn-save root__link">Сохранить</button>
       </form>
     </div>
@@ -99,5 +103,6 @@
 <!-- end template for card -->
 
 <script src="./js/script.js"></script>
+<script src="./js/validate.js"></script>
 </body>
 </html>
