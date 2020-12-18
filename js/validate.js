@@ -66,6 +66,9 @@ const setListeners = (formEl, config) => {
 const enableValidation = (config) => {
   const formList = Array.from(document.forms);
   formList.forEach((formEl) => {
+    formEl.addEventListener('submit', function (e) {
+      e.preventDefault();
+    });
     setListeners(formEl, config);
   })
 }
