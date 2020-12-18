@@ -108,14 +108,14 @@ function clearInputInPopup(popup) {
   });
 }
 
-function formEditProfileSubmitHandler(evt) {
+function editProfileSubmitHandler(evt) {
   name.textContent = profileName.value;
   job.textContent = profileJob.value;
 
   closeForm(popupEditProfile);
 }
 
-function formAddCardSubmitHandler(evt) {
+function addCardSubmitHandler(evt) {
   let name = 'No name';
   let link = './images/no-image.jpg';
   if (cardName.value !== '') {
@@ -149,14 +149,14 @@ btnPopupCloseList.forEach((item) => {
   });
 });
 
-popupEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
+popupEditProfile.addEventListener('submit', editProfileSubmitHandler);
 
 btnAddCard.addEventListener('click', () => {
   openForm(popupAddCard);
   toggleButtonState([cardName, cardLink], formAddCard.querySelector('.popup__btn-save'), config);
 });
 
-popupAddCard.addEventListener('submit', formAddCardSubmitHandler);
+popupAddCard.addEventListener('submit', addCardSubmitHandler);
 
 
 
