@@ -130,7 +130,7 @@ function closeForm(popup) {
 }
 
 function clearInputInPopup(popup) {
-  const form = popup.querySelector('.popup__form');
+  //const form = popup.querySelector('.popup__form');
   // form.reset();
   let inputs = popup.querySelectorAll('.popup__input');
   inputs.forEach((input) => {
@@ -139,7 +139,7 @@ function clearInputInPopup(popup) {
 }
 
 function formEditProfileSubmitHandler(evt) {
-  evt.preventDefault();
+  //evt.preventDefault();
 
   name.textContent = profileName.value;
   job.textContent = profileJob.value;
@@ -148,7 +148,7 @@ function formEditProfileSubmitHandler(evt) {
 }
 
 function formAddCardSubmitHandler(evt) {
-  evt.preventDefault();
+  //evt.preventDefault();
   let name = 'No name';
   let link = './images/no-image.jpg';
   if (cardName.value !== '') {
