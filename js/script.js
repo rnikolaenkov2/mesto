@@ -39,7 +39,7 @@ init(initialCards);
 //инициализация карточек
 function init(cards) {
   cards.forEach((card) => {
-    let cardElement = createCard(cardTemplate, card.name, card.link);
+    const cardElement = createCard(cardTemplate, card.name, card.link);
     addCard(cardElement);
   });
 }
@@ -106,7 +106,7 @@ function closeForm(popup) {
 function clearInputInPopup(popup) {
   //const form = popup.querySelector('.popup__form');
   // form.reset();
-  let inputs = popup.querySelectorAll('.popup__input');
+  const inputs = popup.querySelectorAll('.popup__input');
   inputs.forEach((input) => {
     input.value = '';
   });
@@ -148,7 +148,7 @@ btnProfileChange.addEventListener('click', () => {
 btnPopupCloseList.forEach((item) => {
 
   item.addEventListener('click', (evt) => {
-    let el = evt.target.closest('.popup')
+    const el = evt.target.closest('.popup')
     if (!el.classList.contains('popup popup_theme_photo')) {
       clearInputInPopup(el);
     }
