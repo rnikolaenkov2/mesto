@@ -93,8 +93,6 @@ function setInputEditProfileForm() {
   profileName.value = name.textContent.trim();
   profileJob.value = job.textContent.trim();
 
-  // isValid(formEditProfile, profileName);
-  // isValid(formEditProfile, profileJob);
   toggleButtonState([profileName, profileJob], formEditProfile.querySelector('.popup__btn-save'), config);
 }
 
@@ -104,8 +102,6 @@ function closeForm(popup) {
 }
 
 function clearInputInPopup(popup) {
-  //const form = popup.querySelector('.popup__form');
-  // form.reset();
   const inputs = popup.querySelectorAll('.popup__input');
   inputs.forEach((input) => {
     input.value = '';
@@ -113,8 +109,6 @@ function clearInputInPopup(popup) {
 }
 
 function formEditProfileSubmitHandler(evt) {
-  //evt.preventDefault();
-
   name.textContent = profileName.value;
   job.textContent = profileJob.value;
 
@@ -122,7 +116,6 @@ function formEditProfileSubmitHandler(evt) {
 }
 
 function formAddCardSubmitHandler(evt) {
-  //evt.preventDefault();
   let name = 'No name';
   let link = './images/no-image.jpg';
   if (cardName.value !== '') {
@@ -160,8 +153,6 @@ popupEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
 
 btnAddCard.addEventListener('click', () => {
   openForm(popupAddCard);
-  // isValid(formAddCard, cardName);
-  // isValid(formAddCard, cardLink);
   toggleButtonState([cardName, cardLink], formAddCard.querySelector('.popup__btn-save'), config);
 });
 
