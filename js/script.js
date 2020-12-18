@@ -46,6 +46,19 @@ const formAddCard = popupAddCard.querySelector('.popup__form');
 const cardName = formAddCard.querySelector('.popup__input_name');
 const cardLink = formAddCard.querySelector('.popup__input_link');
 
+const popupList = Array.from(root.querySelectorAll('.popup'));
+
+popupList.forEach((popupEl) => {
+  popupEl.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const el = e.target;
+    if(el.classList.contains('popup')) {
+      Array.from(btnPopupCloseList).forEach((btnPopupCloseEl) => {
+        btnPopupCloseEl.click();
+      });
+    }
+  })
+});
 
 init(initialCards);
 
@@ -100,16 +113,15 @@ function toggleLike(element) {
 //открытие попапа
 function openForm(popup) {
   popup.classList.add('popup_opened');
-  const formEl = popup.querySelector('.popup__form');
-  const inputList = formEl.querySelectorAll('.popup__input');
-  Array.from(inputList).forEach((inputEl) => {
-    isValid(formEl, inputEl, inputEl.validationMessage);
-  })
 }
 
 function setInputEditProfileForm() {
   profileName.value = name.textContent.trim();
   profileJob.value = job.textContent.trim();
+
+  // isValid(formEditProfile, profileName);
+  // isValid(formEditProfile, profileJob);
+  toggleButtonState([profileName, profileJob], formEditProfile.querySelector('.popup__btn-save'), config);
 }
 
 //закрытие попапа
@@ -118,6 +130,8 @@ function closeForm(popup) {
 }
 
 function clearInputInPopup(popup) {
+  const form = popup.querySelector('.popup__form');
+  // form.reset();
   let inputs = popup.querySelectorAll('.popup__input');
   inputs.forEach((input) => {
     input.value = '';
@@ -153,6 +167,7 @@ function formAddCardSubmitHandler(evt) {
 
 btnProfileChange.addEventListener('click', () => {
   setInputEditProfileForm(popupEditProfile)
+
   openForm(popupEditProfile);
 });
 
@@ -171,6 +186,19 @@ popupEditProfile.addEventListener('submit', formEditProfileSubmitHandler);
 
 btnAddCard.addEventListener('click', () => {
   openForm(popupAddCard);
+  // isValid(formAddCard, cardName);
+  // isValid(formAddCard, cardLink);
+  toggleButtonState([cardName, cardLink], formAddCard.querySelector('.popup__btn-save'), config);
 });
 
 popupAddCard.addEventListener('submit', formAddCardSubmitHandler);
+
+
+
+root.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    Array.from(btnPopupCloseList).forEach((btnPopupCloseEl) => {
+      btnPopupCloseEl.click();
+    });
+  }
+})
