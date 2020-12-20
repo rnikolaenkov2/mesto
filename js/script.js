@@ -91,6 +91,12 @@ function toggleLike(element) {
 //открытие попапа
 function openForm(popup) {
   popup.classList.add('popup_opened');
+
+  root.addEventListener('keydown', handlerClosePopupByEsc);
+}
+
+function handlerClosePopupByEsc(e) {
+  closePopupByEsc(e.key);
 }
 
 function setInputEditProfileForm() {
@@ -103,6 +109,7 @@ function setInputEditProfileForm() {
 //закрытие попапа
 function closeForm(popup) {
   popup.classList.remove('popup_opened');
+  root.removeEventListener('keydown', handlerClosePopupByEsc);
 }
 
 function clearInputInPopup(popup) {
@@ -136,6 +143,14 @@ function addCardSubmitHandler(evt) {
   closeForm(popupAddCard);
 }
 
+function closePopupByEsc(e) {
+  if (e === 'Escape') {
+    Array.from(btnPopupCloseList).forEach((btnPopupCloseEl) => {
+      btnPopupCloseEl.click();
+    });
+  }
+}
+
 btnProfileChange.addEventListener('click', () => {
   setInputEditProfileForm(popupEditProfile)
 
@@ -164,10 +179,4 @@ popupAddCard.addEventListener('submit', addCardSubmitHandler);
 
 
 
-root.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    Array.from(btnPopupCloseList).forEach((btnPopupCloseEl) => {
-      btnPopupCloseEl.click();
-    });
-  }
-})
+
