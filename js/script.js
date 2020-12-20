@@ -61,15 +61,19 @@ function createCard(cardTemplate, name, link) {
     toggleLike(event.target);
   });
 
-  img.addEventListener('click', () => {
-    const img = popupPhoto.querySelector('.popup__photo');
-    img.setAttribute('src', link);
-    img.setAttribute('alt', name);
-    popupPhoto.querySelector('.popup__title').textContent = name;
-    openForm(popupPhoto);
+  img.addEventListener('click', (e) => {
+    showBigPhoto(e.target);
   });
 
   return cardElement;
+}
+
+function showBigPhoto(imgCurrent) {
+  const img = popupPhoto.querySelector('.popup__photo');
+  img.setAttribute('src', imgCurrent.src);
+  img.setAttribute('alt', imgCurrent.alt);
+  popupPhoto.querySelector('.popup__title').textContent = imgCurrent.alt;
+  openForm(popupPhoto);
 }
 
 function addCard(cardElement) {
