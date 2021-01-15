@@ -6,16 +6,32 @@ const place = root.querySelector('.places');
 const btnAddCard = root.querySelector('.profile__btn-add-img');
 const popupList = root.querySelectorAll('.popup');
 const btnPopupCloseList = root.querySelectorAll('.popup__btn-close');
+const popupBigImage = root.querySelector('.popup_theme_photo');
+const popupAddCard = root.querySelector('.popup_add-card');
 
+/**
+ * Генерация попап для карточки
+ * @param {link, title} data
+ */
+function renderBigImage(data) {
+  const img = popupBigImage.querySelector('.popup__photo');
+  img.setAttribute('src', data.link);
+  img.setAttribute('alt', data.title);
+  popupBigImage.querySelector('.popup__title').textContent = data.title;
+}
 
-//initial cards
-initialCards.forEach((item) => {
-  const card = new Card(item, '#card');
-  const cardElement = card.generateCard();
-  // card.toggleLike();
-  place.append(cardElement);
-});
+/**
+ * Открытие попап для карточки
+ */
+function showBigImage() {
+  popupBigImage.classList.add('popup_opened');
+  root.addEventListener('keydown', handlerClosePopupByEsc);
+}
 
+/**
+ * Обработчик закрытия попапов при нажатии на Esc
+ * @param {*} e
+ */
 function handlerClosePopupByEsc(e) {
   if (e.key === 'Escape') {
     Array.from(popupList).forEach((item) => {
@@ -25,8 +41,16 @@ function handlerClosePopupByEsc(e) {
   }
 }
 
-function openPopup(data, popup) {
-  popup.classList.add('popup_opened');
+/**
+ * Удаление карточки
+ * @param {*} card
+ */
+function removeCard(card) {
+  card.remove();
+}
+
+function showAddCart() {
+  popupAddCard.classList.add('popup_opened');
   root.addEventListener('keydown', handlerClosePopupByEsc)
 }
 
@@ -42,10 +66,23 @@ function clearPopup(popup) {
   }
 }
 
+
+//initial cards
+initialCards.forEach((item) => {
+  const func = {
+    renderBigImage,
+    showBigImage,
+    removeCard,
+  };
+  const card = new Card(item, '#card', func);
+  const cardElement = card.generateCard();
+  place.append(cardElement);
+});
+
+
 //open popup "add new card"
 btnAddCard.addEventListener('click', (e) => {
-  const popup = root.querySelector('.popup_add-card');
-  openPopup({}, popup);
+  showAddCart();
 });
 
 //close popup
@@ -67,6 +104,5 @@ popupList.forEach((item) => {
       clearPopup(item);
       closePopup(item);
     }
-
   });
 })
