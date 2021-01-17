@@ -1,5 +1,6 @@
 import {initialCards} from './cards.js';
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const root = document.querySelector('.root');
 const place = root.querySelector('.places');
@@ -66,6 +67,24 @@ function clearPopup(popup) {
   }
 }
 
+function addCardSubmitHandler(e) {
+  e.preventDefault();
+  const form = popupAddCard.querySelector('.popup__form');
+  const data = {name: form.querySelector('.popup__input_name').value, link:form.querySelector('.popup__input_link').value};
+  const func = {
+    renderBigImage,
+    showBigImage,
+    removeCard,
+  };
+
+  const card = new Card(data, '#card', func);
+  const cardElement = card.generateCard();
+  place.append(cardElement);
+
+  clearPopup(popupAddCard);
+  closePopup(popupAddCard);
+}
+
 
 //initial cards
 initialCards.forEach((item) => {
@@ -79,10 +98,23 @@ initialCards.forEach((item) => {
   place.append(cardElement);
 });
 
+//валидация формы добавления карточки
+const config = {
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_active',
+  inactiveButtonClass: 'popup__btn-save_disabled',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__btn-save',
+}
+
+const formVaildatorAddCard = new FormValidator(config, popupAddCard.querySelector('.popup__form'));
+
+
 
 //open popup "add new card"
 btnAddCard.addEventListener('click', (e) => {
   showAddCart();
+  formVaildatorAddCard.enableValidation();
 });
 
 //close popup
@@ -105,4 +137,6 @@ popupList.forEach((item) => {
       closePopup(item);
     }
   });
-})
+});
+
+popupAddCard.addEventListener('submit', addCardSubmitHandler);
