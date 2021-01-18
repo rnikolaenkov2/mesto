@@ -43,7 +43,7 @@ export default class Card {
       this._handlerRemoveCard();
     });
 
-    this._el.querySelector('.places__img').addEventListener('click', () => {
+    this._img.addEventListener('click', () => {
       this._handleImageClick();
     });
   }
@@ -51,8 +51,10 @@ export default class Card {
   generateCard() {
     this._el = this._getTemplate();
     this._el.querySelector('.places__title').textContent = this._title;
-    this._el.querySelector('.places__img').src = this._image;
-    this._el.querySelector('.places__img').alt = this._title;
+
+    this._img = this._el.querySelector('.places__img');
+    this._img.src = this._image;
+    this._img.alt = this._title;
 
     this._like = this._el.querySelector('.places__like');
     if (this._isLike) {
