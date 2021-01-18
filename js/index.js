@@ -8,7 +8,8 @@ const btnAddCard = root.querySelector('.profile__btn-add-img');
 const popupList = root.querySelectorAll('.popup');
 const btnPopupCloseList = root.querySelectorAll('.popup__btn-close');
 const popupBigImage = root.querySelector('.popup_theme_photo');
-const img = popupBigImage.querySelector('.popup__photo');
+const popupBigImg = popupBigImage.querySelector('.popup__photo');
+const popupBigTitle = popupBigImage.querySelector('.popup__title');
 const popupAddCard = root.querySelector('.popup_add-card');
 const name = root.querySelector('.profile__name');
 const job = root.querySelector('.profile__role');
@@ -18,24 +19,31 @@ const btnProfileChange = root.querySelector('.profile__btn-change');
 const popupInputName = popupEditProfile.querySelector('.popup__input_func_name');
 const popupInputRole = popupEditProfile.querySelector('.popup__input_func_role');
 
+const addCardForm = popupAddCard.querySelector('.popup__form');
+const addCardName = addCardForm.querySelector('.popup__input_name')
+const addCardLink = addCardForm.querySelector('.popup__input_link')
+
 /**
- * Открытие попап для карточки
+ * Открытие попап
  */
 function showPopup(popup) {
   popup.classList.add('popup_opened');
   root.addEventListener('keydown', handlerClosePopupByEsc);
 }
 
+/**
+ * Открытие попап для карточки
+ */
 function showBigImage(link, title) {
-  img.setAttribute('src', link);
-  img.setAttribute('alt', title);
-  popupBigImage.querySelector('.popup__title').textContent = title;
+  popupBigImg.setAttribute('src', link);
+  popupBigImg.setAttribute('alt', title);
+  popupBigTitle.textContent = title;
+
   showPopup(popupBigImage);
 }
 
 /**
  * Обработчик закрытия попапов при нажатии на Esc
- * @param {*} e
  */
 function handlerClosePopupByEsc(e) {
   if (e.key === 'Escape') {
@@ -100,8 +108,8 @@ function setInputEditProfileForm() {
 
 function addCardSubmitHandler(e) {
   e.preventDefault();
-  const form = popupAddCard.querySelector('.popup__form');
-  const data = {name: form.querySelector('.popup__input_name').value, link:form.querySelector('.popup__input_link').value};
+
+  const data = {name: addCardName.value, link: addCardLink.value};
 
   const card = new Card(data, '#card', showBigImage);
   const cardElement = card.generateCard();
