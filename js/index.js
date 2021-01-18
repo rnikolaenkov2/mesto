@@ -113,7 +113,7 @@ function addCardSubmitHandler(e) {
 
   const card = new Card(data, '#card', func);
   const cardElement = card.generateCard();
-  place.append(cardElement);
+  place.prepend(cardElement);
 
   clearPopup(popupAddCard);
   closePopup(popupAddCard);
