@@ -1,12 +1,10 @@
 export default class Card {
 
-  constructor (data, cardSelector, popupBigImage, showPopup) {
+  constructor (data, cardSelector, showBigImage) {
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
-
-    this._popupBigImage = popupBigImage;
-    this._showPopup = showPopup;
+    this._showBigImage = showBigImage;
   }
 
   _getTemplate() {
@@ -19,15 +17,11 @@ export default class Card {
   }
 
   _handlerRemoveCard() {
-    this._removeCard(this._el);
+    this._el.remove();
   }
 
   _handleImageClick() {
-    const img = this._popupBigImage.querySelector('.popup__photo');
-    img.setAttribute('src', this._image);
-    img.setAttribute('alt', this._title);
-    this._popupBigImage.querySelector('.popup__title').textContent = this._title;
-    this._showPopup(this._popupBigImage);
+    this._showBigImage(this._image, this._title);
   }
 
   _setEventListeners() {
