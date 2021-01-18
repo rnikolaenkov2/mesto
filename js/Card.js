@@ -51,9 +51,6 @@ export default class Card {
     this._img.alt = this._title;
 
     this._like = this._el.querySelector('.places__like');
-    if (this._isLike) {
-      this._like.classList.add('places__like_active');
-    }
 
     this._setEventListeners();
 
