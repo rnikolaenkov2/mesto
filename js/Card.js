@@ -1,13 +1,12 @@
 export default class Card {
 
-  constructor (data, cardSelector, func) {
+  constructor (data, cardSelector, popupBigImage, showPopup) {
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
 
-    this._renderBigImage = func.renderBigImage;
-    this._showBigImage = func.showBigImage;
-    this._removeCard = func.removeCard;
+    this._popupBigImage = popupBigImage;
+    this._showPopup = showPopup;
   }
 
   _getTemplate() {
@@ -24,8 +23,11 @@ export default class Card {
   }
 
   _handleImageClick() {
-    this._renderBigImage({'link' : this._image, 'title' : this._title});
-    this._showBigImage();
+    const img = this._popupBigImage.querySelector('.popup__photo');
+    img.setAttribute('src', this._image);
+    img.setAttribute('alt', this._title);
+    this._popupBigImage.querySelector('.popup__title').textContent = this._title;
+    this._showPopup(this._popupBigImage);
   }
 
   _setEventListeners() {

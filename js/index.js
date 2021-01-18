@@ -17,23 +17,11 @@ const btnProfileChange = root.querySelector('.profile__btn-change');
 const popupInputName = popupEditProfile.querySelector('.popup__input_func_name');
 const popupInputRole = popupEditProfile.querySelector('.popup__input_func_role');
 
-
-/**
- * Генерация попап для карточки
- * @param {link, title} data
- */
-function renderBigImage(data) {
-  const img = popupBigImage.querySelector('.popup__photo');
-  img.setAttribute('src', data.link);
-  img.setAttribute('alt', data.title);
-  popupBigImage.querySelector('.popup__title').textContent = data.title;
-}
-
 /**
  * Открытие попап для карточки
  */
-function showBigImage() {
-  popupBigImage.classList.add('popup_opened');
+function showPopup(popup) {
+  popup.classList.add('popup_opened');
   root.addEventListener('keydown', handlerClosePopupByEsc);
 }
 
@@ -105,13 +93,13 @@ function addCardSubmitHandler(e) {
   e.preventDefault();
   const form = popupAddCard.querySelector('.popup__form');
   const data = {name: form.querySelector('.popup__input_name').value, link:form.querySelector('.popup__input_link').value};
-  const func = {
-    renderBigImage,
-    showBigImage,
-    removeCard,
-  };
+  // const func = {
+  //   renderBigImage,
+  //   showBigImage,
+  //   removeCard,
+  // };
 
-  const card = new Card(data, '#card', func);
+  const card = new Card(data, '#card', showPopup);
   const cardElement = card.generateCard();
   place.prepend(cardElement);
 
@@ -134,12 +122,12 @@ function editProfileSubmitHandler(e) {
 
 //initial cards
 initialCards.forEach((item) => {
-  const func = {
-    renderBigImage,
-    showBigImage,
-    removeCard,
-  };
-  const card = new Card(item, '#card', func);
+  // const func = {
+  //   renderBigImage,
+  //   showBigImage,
+  //   removeCard,
+  // };
+  const card = new Card(item, '#card', popupBigImage, showPopup);
   const cardElement = card.generateCard();
   place.append(cardElement);
 });
