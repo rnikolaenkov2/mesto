@@ -1,18 +1,10 @@
 export default class Card {
 
-  constructor (data, cardSelector, func) {
+  constructor (data, cardSelector, showBigImage) {
     this._title = data.name;
     this._image = data.link;
-    if (data.isLike === undefined) {
-      this._isLike = false;
-    } else {
-      this._isLike = data.isLike;
-    }
     this._cardSelector = cardSelector;
-
-    this._renderBigImage = func.renderBigImage;
-    this._showBigImage = func.showBigImage;
-    this._removeCard = func.removeCard;
+    this._showBigImage = showBigImage;
   }
 
   _getTemplate() {
@@ -21,17 +13,15 @@ export default class Card {
   }
 
   _handlerLikeToggle() {
-    this._isLike = !this._isLike;
     this._like.classList.toggle('places__like_active');
   }
 
   _handlerRemoveCard() {
-    this._removeCard(this._el);
+    this._el.remove();
   }
 
   _handleImageClick() {
-    this._renderBigImage({'link' : this._image, 'title' : this._title});
-    this._showBigImage();
+    this._showBigImage(this._image, this._title);
   }
 
   _setEventListeners() {
@@ -57,9 +47,6 @@ export default class Card {
     this._img.alt = this._title;
 
     this._like = this._el.querySelector('.places__like');
-    if (this._isLike) {
-      this._like.classList.add('places__like_active');
-    }
 
     this._setEventListeners();
 
