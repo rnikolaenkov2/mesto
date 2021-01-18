@@ -16,7 +16,6 @@ export default class Card {
   }
 
   _handlerLikeToggle() {
-    this._isLike = !this._isLike;
     this._like.classList.toggle('places__like_active');
   }
 
