@@ -23,6 +23,8 @@ const addCardForm = popupAddCard.querySelector('.popup__form');
 const addCardName = addCardForm.querySelector('.popup__input_name')
 const addCardLink = addCardForm.querySelector('.popup__input_link')
 const cardSelector = '#card';
+const formValidatorEditProfile = popupEditProfile.querySelector('.popup__form');
+const formValidatorAddCard = popupAddCard.querySelector('.popup__form');
 
 /**
  * Открытие попап
@@ -151,21 +153,21 @@ const validationConfig = {
   submitButtonSelector: '.popup__btn-save',
 }
 
-const formVaildatorAddCard = new FormValidator(validationConfig, popupAddCard.querySelector('.popup__form'));
+new FormValidator(validationConfig, formValidatorAddCard).enableValidation();
 
 //open popup "add new card"
 btnAddCard.addEventListener('click', (e) => {
   showAddCart();
-  formVaildatorAddCard.enableValidation();
+
 });
 
-const formVaildatorEditProfile = new FormValidator(validationConfig, popupEditProfile.querySelector('.popup__form'));
+new FormValidator(validationConfig, formValidatorEditProfile).enableValidation();
 
 //открыие попап редактирование профиля
 btnProfileChange.addEventListener('click', () => {
   setInputEditProfileForm();
   showPopupEditProfile();
-  formVaildatorEditProfile.enableValidation();
+
 });
 
 
