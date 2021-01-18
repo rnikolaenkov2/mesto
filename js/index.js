@@ -143,7 +143,7 @@ initialCards.forEach((item) => {
 });
 
 //валидация формы
-const config = {
+const validationConfig = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_active',
   inactiveButtonClass: 'popup__btn-save_disabled',
@@ -151,7 +151,7 @@ const config = {
   submitButtonSelector: '.popup__btn-save',
 }
 
-const formVaildatorAddCard = new FormValidator(config, popupAddCard.querySelector('.popup__form'));
+const formVaildatorAddCard = new FormValidator(validationConfig, popupAddCard.querySelector('.popup__form'));
 
 //open popup "add new card"
 btnAddCard.addEventListener('click', (e) => {
@@ -159,7 +159,7 @@ btnAddCard.addEventListener('click', (e) => {
   formVaildatorAddCard.enableValidation();
 });
 
-const formVaildatorEditProfile = new FormValidator(config, popupEditProfile.querySelector('.popup__form'));
+const formVaildatorEditProfile = new FormValidator(validationConfig, popupEditProfile.querySelector('.popup__form'));
 
 //открыие попап редактирование профиля
 btnProfileChange.addEventListener('click', () => {
