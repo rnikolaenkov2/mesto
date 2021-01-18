@@ -22,6 +22,7 @@ const popupInputRole = popupEditProfile.querySelector('.popup__input_func_role')
 const addCardForm = popupAddCard.querySelector('.popup__form');
 const addCardName = addCardForm.querySelector('.popup__input_name')
 const addCardLink = addCardForm.querySelector('.popup__input_link')
+const cardSelector = '#card';
 
 /**
  * Открытие попап
@@ -99,11 +100,15 @@ function showPopupEditProfile() {
 }
 
 /**
- * Установка inptu в форму попапа для редактирования профиля
+ * Установка input в форму попапа для редактирования профиля
  */
 function setInputEditProfileForm() {
   popupInputName.value = name.textContent.trim();
   popupInputRole.value = job.textContent.trim();
+}
+
+function createCard(data) {
+  return new Card(data, cardSelector, showBigImage).generateCard();
 }
 
 function addCardSubmitHandler(e) {
@@ -111,8 +116,7 @@ function addCardSubmitHandler(e) {
 
   const data = {name: addCardName.value, link: addCardLink.value};
 
-  const card = new Card(data, '#card', showBigImage);
-  const cardElement = card.generateCard();
+  const cardElement = createCard(data);
   place.prepend(cardElement);
 
   clearPopup(popupAddCard);
@@ -134,8 +138,7 @@ function editProfileSubmitHandler(e) {
 
 //initial cards
 initialCards.forEach((item) => {
-  const card = new Card(item, '#card', showBigImage);
-  const cardElement = card.generateCard();
+  const cardElement = createCard(item);
   place.append(cardElement);
 });
 
