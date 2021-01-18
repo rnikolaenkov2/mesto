@@ -14,6 +14,10 @@ const job = root.querySelector('.profile__role');
 const popupEditProfile = root.querySelector('.popup_edit-profile');
 const btnProfileChange = root.querySelector('.profile__btn-change');
 
+const popupInputName = popupEditProfile.querySelector('.popup__input_func_name');
+const popupInputRole = popupEditProfile.querySelector('.popup__input_func_role');
+
+
 /**
  * Генерация попап для карточки
  * @param {link, title} data
@@ -62,11 +66,17 @@ function showAddCart() {
   root.addEventListener('keydown', handlerClosePopupByEsc)
 }
 
+/**
+ * Закрытие popup
+ */
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   root.removeEventListener('keydown', handlerClosePopupByEsc);
 }
 
+/**
+ * Очистка поле формы попаппа
+ */
 function clearPopup(popup) {
   const form = popup.querySelector('form');
   if(form) {
@@ -83,9 +93,12 @@ function showPopupEditProfile() {
   root.addEventListener('keydown', handlerClosePopupByEsc);
 }
 
+/**
+ * Установка inptu в форму попапа для редактирования профиля
+ */
 function setInputEditProfileForm() {
-  popupEditProfile.querySelector('.popup__input_func_name').value = name.textContent.trim();
-  popupEditProfile.querySelector('.popup__input_func_role').value = job.textContent.trim();
+  popupInputName.value = name.textContent.trim();
+  popupInputRole.value = job.textContent.trim();
 }
 
 function addCardSubmitHandler(e) {
@@ -111,9 +124,8 @@ function addCardSubmitHandler(e) {
  */
 function editProfileSubmitHandler(e) {
   e.preventDefault();
-  name.textContent = popupEditProfile.querySelector('.popup__input_func_name').value;
-  job.textContent = popupEditProfile.querySelector('.popup__input_func_role').value;
-  // closeForm(popupEditProfile);
+  name.textContent = popupInputName.value;
+  job.textContent = popupInputRole.value;
   clearPopup(popupEditProfile);
   closePopup(popupEditProfile);
 
@@ -183,5 +195,3 @@ popupList.forEach((item) => {
 
 popupAddCard.addEventListener('submit', addCardSubmitHandler);
 popupEditProfile.addEventListener('submit', editProfileSubmitHandler);
-
-
