@@ -3,11 +3,6 @@ export default class Card {
   constructor (data, cardSelector, func) {
     this._title = data.name;
     this._image = data.link;
-    if (data.isLike === undefined) {
-      this._isLike = false;
-    } else {
-      this._isLike = data.isLike;
-    }
     this._cardSelector = cardSelector;
 
     this._renderBigImage = func.renderBigImage;
