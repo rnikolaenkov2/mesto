@@ -145,7 +145,8 @@ const validationConfig = {
   submitButtonSelector: '.popup__btn-save',
 }
 
-new FormValidator(validationConfig, formValidatorAddCard).enableValidation();
+const addCardFormValidator = new FormValidator(validationConfig, formValidatorAddCard)
+addCardFormValidator.enableValidation();
 
 function clearErrors(errorList, inputList) {
   Array.from(errorList).forEach((element) => {
@@ -164,8 +165,8 @@ btnAddCard.addEventListener('click', () => {
   showPopup(popupAddCard)
 });
 
-const addCardFormValidator = new FormValidator(validationConfig, formValidatorEditProfile)
-addCardFormValidator.enableValidation();
+const editProfileFormValidator = new FormValidator(validationConfig, formValidatorEditProfile)
+editProfileFormValidator.enableValidation();
 
 //открыие попап редактирование профиля
 btnProfileChange.addEventListener('click', () => {
