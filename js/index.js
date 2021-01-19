@@ -7,8 +7,6 @@ const place = root.querySelector('.places');
 const btnAddCard = root.querySelector('.profile__btn-add-img');
 const popupList = root.querySelectorAll('.popup');
 
-const btnPopupCloseList = root.querySelectorAll('.popup__btn-close');
-
 const popupBigImage = root.querySelector('.popup_theme_photo');
 const btnClosePopupBigImage = popupBigImage.querySelector('.popup__btn-close');
 const popupBigImg = popupBigImage.querySelector('.popup__photo');
@@ -19,8 +17,6 @@ const btnClosePopupAddCard = popupAddCard.querySelector('.popup__btn-close');
 const addCardForm = popupAddCard.querySelector('.popup__form');
 const addCardName = addCardForm.querySelector('.popup__input_name')
 const addCardLink = addCardForm.querySelector('.popup__input_link')
-const addCardErrorList = addCardForm.querySelectorAll('.popup__error');
-const addCardInputList = addCardForm.querySelectorAll('.popup__input');
 
 const name = root.querySelector('.profile__name');
 const job = root.querySelector('.profile__role');
@@ -28,8 +24,6 @@ const job = root.querySelector('.profile__role');
 const popupEditProfile = root.querySelector('.popup_edit-profile');
 const btnProfileChange = root.querySelector('.profile__btn-change');
 const btnCloseProfileChange = popupEditProfile.querySelector('.popup__btn-close');
-const editProfileErrorList = popupEditProfile.querySelectorAll('.popup__error');
-const editProfileInputList = popupEditProfile.querySelectorAll('.popup__input');
 
 const popupInputName = popupEditProfile.querySelector('.popup__input_func_name');
 const popupInputRole = popupEditProfile.querySelector('.popup__input_func_role');
@@ -64,7 +58,6 @@ function showBigImage(link, title) {
 function handlerClosePopupByEsc(e) {
   if (e.key === 'Escape') {
     Array.from(popupList).forEach((item) => {
-      // clearPopup(item);
       closePopup(item);
     })
   }
@@ -76,15 +69,6 @@ function handlerClosePopupByEsc(e) {
  */
 function removeCard(card) {
   card.remove();
-}
-
-
-/**
- * Открытие попап для добавления карточки
- */
-function showAddCart() {
-  popupAddCard.classList.add('popup_opened');
-  root.addEventListener('keydown', handlerClosePopupByEsc)
 }
 
 /**
@@ -101,15 +85,6 @@ function closePopup(popup) {
 function clearPopup(popup) {
   const form = popup.querySelector('form');
   form.reset();
-}
-
-/**
- * Открытие попапа реадктирование профиля
- */
-function showPopupEditProfile() {
-  popupEditProfile.classList.add('popup_opened');
-
-  root.addEventListener('keydown', handlerClosePopupByEsc);
 }
 
 /**
@@ -163,32 +138,23 @@ const validationConfig = {
   submitButtonSelector: '.popup__btn-save',
 }
 
-new FormValidator(validationConfig, formValidatorAddCard).enableValidation();
-
-function clearErrors(errorList, inputList) {
-  Array.from(errorList).forEach((element) => {
-    element.classList.remove('popup__error_active');
-    element.textContent = '';
-  });
-
-  Array.from(inputList).forEach((element) => {
-    element.classList.remove('popup__input_type_error')
-  });
-}
+const addCardFormValidator = new FormValidator(validationConfig, formValidatorAddCard)
+addCardFormValidator.enableValidation();
 
 //open popup "add new card"
 btnAddCard.addEventListener('click', () => {
-  clearErrors(addCardErrorList, addCardInputList);
-  showAddCart();
+  addCardFormValidator.clearErrors();
+  showPopup(popupAddCard)
 });
 
-new FormValidator(validationConfig, formValidatorEditProfile).enableValidation();
+const editProfileFormValidator = new FormValidator(validationConfig, formValidatorEditProfile)
+editProfileFormValidator.enableValidation();
 
 //открыие попап редактирование профиля
 btnProfileChange.addEventListener('click', () => {
-  clearErrors(editProfileErrorList, editProfileInputList);
+  editProfileFormValidator.clearErrors();
   setInputEditProfileForm();
-  showPopupEditProfile();
+  showPopup(popupEditProfile);
 });
 
 //close popup popup Big Image
