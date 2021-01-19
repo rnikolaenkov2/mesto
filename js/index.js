@@ -95,15 +95,6 @@ function clearPopup(popup) {
 }
 
 /**
- * Открытие попапа реадктирование профиля
- */
-function showPopupEditProfile() {
-  popupEditProfile.classList.add('popup_opened');
-
-  root.addEventListener('keydown', handlerClosePopupByEsc);
-}
-
-/**
  * Установка input в форму попапа для редактирования профиля
  */
 function setInputEditProfileForm() {
@@ -179,7 +170,7 @@ new FormValidator(validationConfig, formValidatorEditProfile).enableValidation()
 btnProfileChange.addEventListener('click', () => {
   clearErrors(editProfileErrorList, editProfileInputList);
   setInputEditProfileForm();
-  showPopupEditProfile();
+  showPopup(popupEditProfile);
 });
 
 //close popup popup Big Image
