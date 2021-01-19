@@ -59,6 +59,12 @@ export default class FormValidator {
     })
   }
 
+  clearErrors() {
+    this._inputList.forEach((item) => {
+      this._hideError(item);
+    });
+  }
+
   enableValidation() {
     this._inputList = this._form.querySelectorAll(this._config.inputSelector);
     this._inputList.forEach((item) => {
