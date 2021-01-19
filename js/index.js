@@ -164,7 +164,8 @@ btnAddCard.addEventListener('click', () => {
   showPopup(popupAddCard)
 });
 
-new FormValidator(validationConfig, formValidatorEditProfile).enableValidation();
+const addCardFormValidator = new FormValidator(validationConfig, formValidatorEditProfile)
+addCardFormValidator.enableValidation();
 
 //открыие попап редактирование профиля
 btnProfileChange.addEventListener('click', () => {
