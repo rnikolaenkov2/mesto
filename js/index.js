@@ -78,15 +78,6 @@ function removeCard(card) {
   card.remove();
 }
 
-
-/**
- * Открытие попап для добавления карточки
- */
-function showAddCart() {
-  popupAddCard.classList.add('popup_opened');
-  root.addEventListener('keydown', handlerClosePopupByEsc)
-}
-
 /**
  * Закрытие popup
  */
@@ -179,7 +170,7 @@ function clearErrors(errorList, inputList) {
 //open popup "add new card"
 btnAddCard.addEventListener('click', () => {
   clearErrors(addCardErrorList, addCardInputList);
-  showAddCart();
+  showPopup(popupAddCard)
 });
 
 new FormValidator(validationConfig, formValidatorEditProfile).enableValidation();
