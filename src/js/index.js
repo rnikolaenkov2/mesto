@@ -1,6 +1,7 @@
 import '../pages/index.css';
 
-import {initialCards} from '../utils/constants.js';
+import Section from '../components/Section.js';
+import cards from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 
@@ -130,6 +131,11 @@ initialCards.forEach((item) => {
   const cardElement = createCard(item);
   place.append(cardElement);
 });
+// const section = new Section({
+//   items: cards,
+//   renderer: (item) => new Card()
+// }, '')
+
 
 //валидация формы
 const validationConfig = {
