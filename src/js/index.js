@@ -1,8 +1,8 @@
 import '../pages/index.css';
 
-import {initialCards} from './cards.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import {initialCards} from '../utils/constants.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
 
 const root = document.querySelector('.root');
 const place = root.querySelector('.places');
