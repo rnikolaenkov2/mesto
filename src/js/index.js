@@ -1,7 +1,7 @@
 import '../pages/index.css';
 
 import Section from '../components/Section.js';
-import cards from '../utils/constants.js';
+import {cards} from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 
@@ -127,14 +127,21 @@ function editProfileSubmitHandler(e) {
 
 
 //initial cards
-initialCards.forEach((item) => {
-  const cardElement = createCard(item);
-  place.append(cardElement);
-});
-// const section = new Section({
-//   items: cards,
-//   renderer: (item) => new Card()
-// }, '')
+// initialCards.forEach((item) => {
+//   const cardElement = createCard(item);
+//   place.append(cardElement);
+// });
+
+//new
+const cardList = new Section({
+  items: cards,
+  renderer: (item) => {
+    const card = new Card(item, cardSelector, showBigImage);
+    const cardElement = card.generateCard();
+    cardList.setElement(cardElement);
+  }
+}, '.places');
+//end new
 
 
 //валидация формы
@@ -207,3 +214,7 @@ popupAddCard.addEventListener('click', (e) => {
 
 popupAddCard.addEventListener('submit', addCardSubmitHandler);
 popupEditProfile.addEventListener('submit', editProfileSubmitHandler);
+
+//new
+cardList.renderer();
+//end new
