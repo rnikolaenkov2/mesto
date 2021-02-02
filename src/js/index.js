@@ -6,8 +6,17 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
-import {cardSelector, popupImageSelector, cardContainerSelector, formValidatorAddCard, btnAddCard} from '../utils/constants.js';
+import {
+  cardSelector,
+  popupImageSelector,
+  cardContainerSelector,
+  formValidatorAddCard,
+  btnAddCard,
+  formValidatorEditProfile,
+  btnProfileChange
+} from '../utils/constants.js';
 
 //валидация формы
 const validationConfig = {
@@ -27,13 +36,40 @@ const popupAddCard = new PopupWithForm({
     const card = new Card(formData, cardSelector, popupWithImage.open.bind(popupWithImage));
     const cardElement = card.generateCard();
     cardList.addElement(cardElement);
-  },
-  handleResetError: addCardFormValidator.clearErrors,
+  }
 });
 
 popupAddCard.setEventListeners();
+btnAddCard.addEventListener('click', () => {
+  addCardFormValidator.clearErrors();
+  popupAddCard.open();
+});
 
-btnAddCard.addEventListener('click', () => popupAddCard.open());
+const editProfileFormValidator = new FormValidator(validationConfig, formValidatorEditProfile);
+editProfileFormValidator.enableValidation();
+
+const userInfo = new UserInfo({
+  selectorName: '.profile__name',
+  selectorRole: '.profile__role'
+});
+
+const popupEditProfile = new PopupWithForm({
+  selectorPopup: '.popup_edit-profile',
+  handleSubmitForm: (formData) => {
+    console.log(formData);
+    userInfo.setUserInfo(formData);
+  }
+});
+
+popupEditProfile.setEventListeners();
+btnProfileChange.addEventListener('click', () => {
+  editProfileFormValidator.clearErrors();
+  const userInfoData = userInfo.getUserInfo();
+  console.log(userInfoData);
+  popupEditProfile.addData(userInfoData);
+  popupEditProfile.open()
+});
+
 
 const popupWithImage = new PopupWithImage(popupImageSelector);
 popupWithImage.setEventListeners();
