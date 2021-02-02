@@ -28,10 +28,7 @@ export const cards = [
 export const cardSelector = '#card';
 export const popupImageSelector = '.popup_theme_photo';
 export const cardContainerSelector = '.places';
-export const formValidatorAddCard = document.querySelector('.popup_add-card').querySelector('.popup__form');
-export const btnAddCard = document.querySelector('.profile__btn-add-img');
-export const formValidatorEditProfile = document.querySelector('.popup_edit-profile').querySelector('.popup__form');
-export const btnProfileChange = document.querySelector('.profile__btn-change');
+
 
 //валидация формы
 export const validationConfig = {

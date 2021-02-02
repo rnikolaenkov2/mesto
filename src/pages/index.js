@@ -12,12 +12,13 @@ import {
   cardSelector,
   popupImageSelector,
   cardContainerSelector,
-  formValidatorAddCard,
-  btnAddCard,
-  formValidatorEditProfile,
-  btnProfileChange,
   validationConfig
 } from '../utils/constants.js';
+
+const formValidatorAddCard = document.querySelector('.popup_add-card').querySelector('.popup__form');
+const btnAddCard = document.querySelector('.profile__btn-add-img');
+const formValidatorEditProfile = document.querySelector('.popup_edit-profile').querySelector('.popup__form');
+const btnProfileChange = document.querySelector('.profile__btn-change');
 
 function createCard(data, cardSelector, popup) {
   const card = new Card(data, cardSelector, popup);
