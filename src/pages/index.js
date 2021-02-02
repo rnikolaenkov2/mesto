@@ -1,4 +1,4 @@
-import '../pages/index.css';
+import './index.css';
 
 import Section from '../components/Section.js';
 import {cards} from '../utils/constants.js';
@@ -12,12 +12,19 @@ import {
   cardSelector,
   popupImageSelector,
   cardContainerSelector,
-  formValidatorAddCard,
-  btnAddCard,
-  formValidatorEditProfile,
-  btnProfileChange,
   validationConfig
 } from '../utils/constants.js';
+
+const formValidatorAddCard = document.querySelector('.popup_add-card').querySelector('.popup__form');
+const btnAddCard = document.querySelector('.profile__btn-add-img');
+const formValidatorEditProfile = document.querySelector('.popup_edit-profile').querySelector('.popup__form');
+const btnProfileChange = document.querySelector('.profile__btn-change');
+
+function createCard(data, cardSelector, popup) {
+  const card = new Card(data, cardSelector, popup);
+  const cardElement = card.generateCard();
+  cardList.addElement(cardElement);
+}
 
 
 //добавление карточки
@@ -27,9 +34,7 @@ addCardFormValidator.enableValidation();
 const popupAddCard = new PopupWithForm({
   selectorPopup: '.popup_add-card',
   handleSubmitForm: (formData) => {
-    const card = new Card(formData, cardSelector, popupWithImage.open.bind(popupWithImage));
-    const cardElement = card.generateCard();
-    cardList.addElement(cardElement);
+    createCard(formData, cardSelector, popupWithImage.open.bind(popupWithImage))
   }
 });
 
@@ -51,7 +56,6 @@ const userInfo = new UserInfo({
 const popupEditProfile = new PopupWithForm({
   selectorPopup: '.popup_edit-profile',
   handleSubmitForm: (formData) => {
-    console.log(formData);
     userInfo.setUserInfo(formData);
   }
 });
@@ -60,7 +64,6 @@ popupEditProfile.setEventListeners();
 btnProfileChange.addEventListener('click', () => {
   editProfileFormValidator.clearErrors();
   const userInfoData = userInfo.getUserInfo();
-  console.log(userInfoData);
   popupEditProfile.addData(userInfoData);
   popupEditProfile.open()
 });
@@ -72,9 +75,7 @@ popupWithImage.setEventListeners();
 const cardList = new Section({
   items: cards,
   renderer: (item) => {
-    const card = new Card(item, cardSelector, popupWithImage.open.bind(popupWithImage));
-    const cardElement = card.generateCard();
-    cardList.setElement(cardElement);
+    createCard(item, cardSelector, popupWithImage.open.bind(popupWithImage))
   }
 }, cardContainerSelector);
 
