@@ -24,3 +24,9 @@ export const cards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+export const cardSelector = '#card';
+export const popupImageSelector = '.popup_theme_photo';
+export const cardContainerSelector = '.places';
+export const formValidatorAddCard = document.querySelector('.popup_add-card').querySelector('.popup__form');
+export const btnAddCard = document.querySelector('.profile__btn-add-img');
