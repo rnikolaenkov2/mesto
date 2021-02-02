@@ -1,10 +1,10 @@
 export default class Card {
 
-  constructor (data, cardSelector, showBigImage) {
+  constructor (data, cardSelector, handleCardClick) {
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
-    this._showBigImage = showBigImage;
+    this._showBigImage = handleCardClick;
   }
 
   _getTemplate() {
@@ -21,7 +21,7 @@ export default class Card {
   }
 
   _handleImageClick() {
-    this._showBigImage(this._image, this._title);
+    this._showBigImage(this._title, this._image);
   }
 
   _setEventListeners() {

@@ -2,6 +2,7 @@ export default class FormValidator {
   constructor(config, form) {
     this._form = form;
     this._config = config;
+    this.clearErrors = this.clearErrors.bind(this);
   }
 
   _isValid(inputEl) {
@@ -63,6 +64,7 @@ export default class FormValidator {
     this._inputList.forEach((item) => {
       this._hideError(item);
     });
+    this._disableBtnSave();
   }
 
   enableValidation() {

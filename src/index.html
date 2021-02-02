@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Проект Место</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 <body class="root">
 <!-- header -->
   <header class="header root__header">
     <a href="#" class="logo root__link" target="_self">
-      <img src="./images/logo.svg" alt="Проект Место" class="logo__img">
+      <img src="<%=require('./images/logo.svg')%>" alt="Проект Место" class="logo__img">
     </a>
   </header>
 <!-- end header -->
@@ -18,7 +18,7 @@
 <main>
   <!-- profile -->
   <section class="profile root__section">
-    <img src="./images/avatar.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
+    <img src="<%=require('./images/avatar.jpg')%>" alt="Жак-Ив Кусто" class="profile__avatar">
     <div class="profile__info">
       <div class="profile__info-wrap">
         <h1 class="profile__name">
@@ -68,10 +68,10 @@
     <button type="button" class="popup__btn-close root__link" aria-label="закрыть попап"></button>
     <div class="popup__content">
       <h2 class="popup__title">Новое место</h2>
-      <form action="#" class="popup__form" name="form-new-card" novalidate>
+      <form action="#" class="popup__form popup__form_form-add-card" name="form-new-card" novalidate>
         <input type="text" class="popup__input popup__input_name" aria-label="имя" value="" name="name" placeholder="Название" id="new-card-name" required minlength="2" maxlength="30">
         <span class="popup__error new-card-name-error">Вы пропустили это поле</span>
-        <input type="url" class="popup__input popup__input_link" aria-label="ссылка" value="" name="role" placeholder="Ссылка на картинку" id="new-card-link" required>
+        <input type="url" class="popup__input popup__input_link" aria-label="ссылка" value="" name="link" placeholder="Ссылка на картинку" id="new-card-link" required>
         <span class="popup__error new-card-link-error">Вы пропустили это поле</span>
         <button type="submit" class="popup__btn-save root__link">Сохранить</button>
       </form>
@@ -82,7 +82,7 @@
 <div class="popup popup_theme_photo">
   <div class="popup__container popup__container_theme_photo">
     <button type="button" class="popup__btn-close popup__btn-close_theme_photo root__link" aria-label="закрыть попап"></button>
-    <img src="./images/no-image.jpg" alt="Нет картинки" class="popup__photo">
+    <img src="<%=require('./images/no-image.jpg')%>" alt="Нет картинки" class="popup__photo">
     <h2 class="popup__title popup__title_theme_photo">Новое место</h2>
   </div>
 </div>
@@ -101,7 +101,7 @@
   </li>
 </template>
 <!-- end template for card -->
-<script type="module" src="./js/index.js"></script>
+<!-- <script type="module" src="./js/index.js"></script> -->
 <!--<script src="./js/cards.js"></script>-->
 <!--<script src="./js/script.js"></script>-->
 <!--<script src="./js/validate.js"></script>-->
