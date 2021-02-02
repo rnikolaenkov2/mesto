@@ -1,4 +1,4 @@
-import '../pages/index.css';
+import './index.css';
 
 import Section from '../components/Section.js';
 import {cards} from '../utils/constants.js';
