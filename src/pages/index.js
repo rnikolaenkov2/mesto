@@ -19,6 +19,12 @@ import {
   validationConfig
 } from '../utils/constants.js';
 
+function createCard(data, cardSelector, popup) {
+  const card = new Card(data, cardSelector, popup);
+  const cardElement = card.generateCard();
+  cardList.addElement(cardElement);
+}
+
 
 //добавление карточки
 const addCardFormValidator = new FormValidator(validationConfig, formValidatorAddCard);
@@ -27,9 +33,7 @@ addCardFormValidator.enableValidation();
 const popupAddCard = new PopupWithForm({
   selectorPopup: '.popup_add-card',
   handleSubmitForm: (formData) => {
-    const card = new Card(formData, cardSelector, popupWithImage.open.bind(popupWithImage));
-    const cardElement = card.generateCard();
-    cardList.addElement(cardElement);
+    createCard(formData, cardSelector, popupWithImage.open.bind(popupWithImage))
   }
 });
 
@@ -70,9 +74,7 @@ popupWithImage.setEventListeners();
 const cardList = new Section({
   items: cards,
   renderer: (item) => {
-    const card = new Card(item, cardSelector, popupWithImage.open.bind(popupWithImage));
-    const cardElement = card.generateCard();
-    cardList.setElement(cardElement);
+    createCard(item, cardSelector, popupWithImage.open.bind(popupWithImage))
   }
 }, cardContainerSelector);
 
