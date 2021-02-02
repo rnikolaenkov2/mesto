@@ -18,6 +18,7 @@ export default class Card {
 
   _handlerRemoveCard() {
     this._el.remove();
+    this._el = null;
   }
 
   _handleImageClick() {

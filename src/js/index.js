@@ -51,7 +51,6 @@ const userInfo = new UserInfo({
 const popupEditProfile = new PopupWithForm({
   selectorPopup: '.popup_edit-profile',
   handleSubmitForm: (formData) => {
-    console.log(formData);
     userInfo.setUserInfo(formData);
   }
 });
@@ -60,7 +59,6 @@ popupEditProfile.setEventListeners();
 btnProfileChange.addEventListener('click', () => {
   editProfileFormValidator.clearErrors();
   const userInfoData = userInfo.getUserInfo();
-  console.log(userInfoData);
   popupEditProfile.addData(userInfoData);
   popupEditProfile.open()
 });
