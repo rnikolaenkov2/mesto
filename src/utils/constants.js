@@ -32,3 +32,12 @@ export const formValidatorAddCard = document.querySelector('.popup_add-card').qu
 export const btnAddCard = document.querySelector('.profile__btn-add-img');
 export const formValidatorEditProfile = document.querySelector('.popup_edit-profile').querySelector('.popup__form');
 export const btnProfileChange = document.querySelector('.profile__btn-change');
+
+//валидация формы
+export const validationConfig = {
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_active',
+  inactiveButtonClass: 'popup__btn-save_disabled',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__btn-save',
+}

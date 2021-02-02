@@ -15,18 +15,12 @@ import {
   formValidatorAddCard,
   btnAddCard,
   formValidatorEditProfile,
-  btnProfileChange
+  btnProfileChange,
+  validationConfig
 } from '../utils/constants.js';
 
-//валидация формы
-const validationConfig = {
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_active',
-  inactiveButtonClass: 'popup__btn-save_disabled',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__btn-save',
-}
 
+//добавление карточки
 const addCardFormValidator = new FormValidator(validationConfig, formValidatorAddCard);
 addCardFormValidator.enableValidation();
 
@@ -45,6 +39,7 @@ btnAddCard.addEventListener('click', () => {
   popupAddCard.open();
 });
 
+//редактирование профиля
 const editProfileFormValidator = new FormValidator(validationConfig, formValidatorEditProfile);
 editProfileFormValidator.enableValidation();
 
@@ -70,7 +65,7 @@ btnProfileChange.addEventListener('click', () => {
   popupEditProfile.open()
 });
 
-
+//рендер карточек
 const popupWithImage = new PopupWithImage(popupImageSelector);
 popupWithImage.setEventListeners();
 
