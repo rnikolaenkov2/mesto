@@ -18,16 +18,16 @@
 <main>
   <!-- profile -->
   <section class="profile root__section">
-    <img src="<%=require('./images/avatar.jpg')%>" alt="Жак-Ив Кусто" class="profile__avatar">
+    <img src="" alt="" class="profile__avatar">
     <div class="profile__info">
       <div class="profile__info-wrap">
         <h1 class="profile__name">
-          Жак-Ив Кусто
+          <!-- Жак-Ив Кусто -->
         </h1>
         <button type="button" class="profile__btn-change root__link" aria-label="редактирование профиля"></button>
       </div>
       <p class="profile__role">
-        Исследователь океана
+        <!-- Исследователь океана -->
       </p>
     </div>
     <button type="button" class="profile__btn-add-img root__link" aria-label="добавление места"></button>
@@ -55,7 +55,7 @@
       <form action="#" class="popup__form" name="form-change-profile" novalidate>
         <input type="text" class="popup__input popup__input_func_name" aria-label="имя" value="" name="name" id="profile-name" required minlength="2" maxlength="40" placeholder="Имя">
         <span class="popup__error profile-name-error">Вы пропустили это поле</span>
-        <input type="text" class="popup__input popup__input_func_role" aria-label="роль" value="" name="role" id="profile-role" required minlength="2" maxlength="200" placeholder="Роль">
+        <input type="text" class="popup__input popup__input_func_role" aria-label="роль" value="" name="about" id="profile-role" required minlength="2" maxlength="200" placeholder="Роль">
         <span class="popup__error profile-role-error">Вы пропустили это поле</span>
         <button type="submit" class="popup__btn-save root__link">Сохранить</button>
       </form>

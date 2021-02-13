@@ -61,7 +61,13 @@ editProfileFormValidator.enableValidation();
 
 const userInfo = new UserInfo({
   selectorName: '.profile__name',
-  selectorRole: '.profile__role'
+  selectorRole: '.profile__role',
+  selectorAva: '.profile__avatar'
+});
+
+const userInfoApi = api.getProfile();
+userInfoApi.then((data) => {
+  userInfo.setUserInfo(data);
 });
 
 const popupEditProfile = new PopupWithForm({

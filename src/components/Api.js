@@ -11,9 +11,10 @@ export default class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  _sendGetRequest(url, method) {
-    return fetch(url, {
-      method: method,
+  _sendGetRequest(url) {
+    const fullUrl = `${this._url}/${url}`;
+    return fetch(fullUrl, {
+      method: 'GET',
       headers: this._headers,
     }).then((res) => {
       return this._check(res);
@@ -21,7 +22,11 @@ export default class Api {
   }
 
   getCardList() {
-    return this._sendGetRequest(`${this._url}/cards`, 'GET')
+    return this._sendGetRequest(`cards`);
+  }
+
+  getProfile() {
+    return this._sendGetRequest(`users/me`);
   }
 
 
