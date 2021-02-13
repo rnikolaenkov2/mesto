@@ -7,12 +7,14 @@ import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 
 import {
   cardSelector,
   popupImageSelector,
   cardContainerSelector,
-  validationConfig
+  validationConfig,
+  apiConfig
 } from '../utils/constants.js';
 
 const formValidatorAddCard = document.querySelector('.popup_add-card').querySelector('.popup__form');
@@ -20,7 +22,16 @@ const btnAddCard = document.querySelector('.profile__btn-add-img');
 const formValidatorEditProfile = document.querySelector('.popup_edit-profile').querySelector('.popup__form');
 const btnProfileChange = document.querySelector('.profile__btn-change');
 
-function createCard(data, cardSelector, popup) {
+const api = new Api({
+  url: apiConfig.url,
+  headers: {
+    'content-type': 'application/json',
+    'Authorization': apiConfig.token
+  }
+});
+
+
+function createCard(data, cardSelector, popup, cardList) {
   const card = new Card(data, cardSelector, popup);
   const cardElement = card.generateCard();
   cardList.addElement(cardElement);
@@ -72,11 +83,18 @@ btnProfileChange.addEventListener('click', () => {
 const popupWithImage = new PopupWithImage(popupImageSelector);
 popupWithImage.setEventListeners();
 
-const cardList = new Section({
-  items: cards,
-  renderer: (item) => {
-    createCard(item, cardSelector, popupWithImage.open.bind(popupWithImage))
-  }
-}, cardContainerSelector);
+const cardListApi = api.getCardList();
 
-cardList.renderer();
+cardListApi.then((data) => {
+  // debugger;
+  const cardList = new Section({
+    items: data,
+    renderer: (item) => {
+      createCard(item, cardSelector, popupWithImage.open.bind(popupWithImage), cardList)
+    }
+  }, cardContainerSelector);
+
+  cardList.renderer();
+})
+
+
