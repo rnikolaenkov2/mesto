@@ -6,7 +6,8 @@ export default class Card {
     this._image = data.link;
     this._cardSelector = cardSelector;
     this._showBigImage = handleCardClick;
-    this._likeCount = data.likes.length;
+    this._likes = data.likes;
+    this._owner = data.owner;
   }
 
   _getTemplate() {
@@ -41,6 +42,16 @@ export default class Card {
     });
   }
 
+  _isLike() {
+    this._likes.find((element) => {
+      if (window.localStorage.getItem('_id') === element._id) {
+        return true;
+      }
+    });
+
+    return false;
+  }
+
   generateCard() {
     this._el = this._getTemplate();
     this._el.querySelector('.places__title').textContent = this._title;
@@ -51,7 +62,11 @@ export default class Card {
 
     this._like = this._el.querySelector('.places__like');
 
-    this._el.querySelector('.places__like-count').textContent = this._likeCount;
+    this._el.querySelector('.places__like-count').textContent = this._likes.length;
+
+    if (this._isLike()) {
+      this._like.classList.add('places__like_active');
+    }
 
     this._setEventListeners();
 

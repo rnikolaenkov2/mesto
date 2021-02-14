@@ -17,6 +17,8 @@ import {
   apiConfig
 } from '../utils/constants.js';
 
+const storage = window.localStorage;
+
 const formValidatorAddCard = document.querySelector('.popup_add-card').querySelector('.popup__form');
 const btnAddCard = document.querySelector('.profile__btn-add-img');
 const formValidatorEditProfile = document.querySelector('.popup_edit-profile').querySelector('.popup__form');
@@ -80,8 +82,14 @@ const userInfo = new UserInfo({
 const userInfoApi = api.getProfile();
 userInfoApi
   .then((data) => {
+    console.log(data);
+    storage.setItem('_id', data._id);
+    return data;
+  })
+  .then((data) => {
     userInfo.setUserInfo(data);
   })
+
   .catch((res) => {
     console.log(res);
   });
