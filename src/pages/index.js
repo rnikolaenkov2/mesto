@@ -1,7 +1,6 @@
 import './index.css';
 
 import Section from '../components/Section.js';
-import {cards} from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -34,7 +33,7 @@ const api = new Api({
 
 
 function createCard(data, cardSelector, popup, cardList) {
-  const card = new Card(data, cardSelector, popup);
+  const card = new Card(data, cardSelector, popup, handleRemoveCard);
   const cardElement = card.generateCard();
   cardList.addElement(cardElement);
 }
@@ -53,11 +52,10 @@ const popupAddCard = new PopupWithForm({
       .then((res) => {
         render();
       })
-      .then((res) => {
-        btnSave.textContent = 'Сохранить';
-      })
       .catch((res) => {
         console.log(res);
+      })
+      .finally(() => {
         btnSave.textContent = 'Сохранить';
       })
   }
@@ -68,6 +66,36 @@ btnAddCard.addEventListener('click', () => {
   addCardFormValidator.clearErrors();
   popupAddCard.open();
 });
+
+//удаление карточки
+const popupDelCard =new PopupWithForm({
+  selectorPopup: '.popup_delete-card',
+  handleSubmitForm:(formData) => {
+    const btnSave = document.querySelector('.popup_delete-card').querySelector('.popup__btn-save');
+    btnSave.textContent = 'Сохранение...';
+    api.deleteCard(formData['card-id'])
+    .then(() => {
+      render();
+    })
+    .catch((res) => {
+      console.log(res);
+    })
+    .finally(() => {
+      btnSave.textContent = 'Да';
+    });
+  }
+});
+
+popupDelCard.setEventListeners();
+
+function handleRemoveCard(cardId) {
+  document.querySelector('.popup__input_card-id').value = cardId;
+  popupDelCard.open();
+}
+// btnAddCard.addEventListener('click', () => {
+//   // addCardFormValidator.clearErrors();
+//   popupDelCard.open();
+// });
 
 //редактирование профиля
 const editProfileFormValidator = new FormValidator(validationConfig, formValidatorEditProfile);
@@ -82,14 +110,12 @@ const userInfo = new UserInfo({
 const userInfoApi = api.getProfile();
 userInfoApi
   .then((data) => {
-    console.log(data);
     storage.setItem('_id', data._id);
     return data;
   })
   .then((data) => {
     userInfo.setUserInfo(data);
   })
-
   .catch((res) => {
     console.log(res);
   });
@@ -103,11 +129,11 @@ const popupEditProfile = new PopupWithForm({
       .then((res) => {
         userInfo.setUserInfo(res);
       })
-      .then((res)=> {
-         btnSave.textContent = 'Сохранить';
-      })
       .catch((res) => {
         console.log(res);
+
+      })
+      .finally(() => {
         btnSave.textContent = 'Сохранить';
       });
   }
@@ -131,7 +157,6 @@ function render() {
 
   cardListApi
     .then((data) => {
-      console.log(data);
       const cardList = new Section({
         items: data,
         renderer: (item) => {

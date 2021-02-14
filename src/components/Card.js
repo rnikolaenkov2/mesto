@@ -1,14 +1,15 @@
 export default class Card {
 
-  constructor (data, cardSelector, handleCardClick) {
-    console.log(data);
+  constructor (data, cardSelector, handleCardClick, handleDeleteCard) {
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
     this._showBigImage = handleCardClick;
+    this._removeCard = handleDeleteCard;
     this._likes = data.likes;
     this._owner = data.owner;
     this._myId = window.localStorage.getItem('_id');
+    this._cardId = data._id;
   }
 
   _getTemplate() {
@@ -21,8 +22,9 @@ export default class Card {
   }
 
   _handlerRemoveCard() {
-    this._el.remove();
-    this._el = null;
+    this._removeCard(this._cardId);
+    // this._el.remove();
+    // this._el = null;
   }
 
   _handleImageClick() {
@@ -77,7 +79,6 @@ export default class Card {
       this._like.classList.add('places__like_active');
     }
 
-    console.log(this._isMyCard())
     if (this._isMyCard()) {
       this._el.querySelector('.places__remove').classList.add('places__remove_visible');
     }

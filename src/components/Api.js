@@ -43,6 +43,16 @@ export default class Api {
     })
   }
 
+  _sendDeleteRequest(url) {
+    const fullUrl = `${this._url}/${url}`;
+    return fetch(fullUrl, {
+      method: 'DELETE',
+      headers: this._headers,
+    }).then((res) => {
+      return this._check(res);
+    })
+  }
+
   getCardList() {
     return this._sendGetRequest('cards');
   }
@@ -57,6 +67,10 @@ export default class Api {
 
   addCard(name, link) {
     return this._sendPostRequest('cards', {name: name, link: link});
+  }
+
+  deleteCard(cardId) {
+    return this._sendDeleteRequest(`cards/${cardId}`);
   }
 
 
