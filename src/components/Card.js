@@ -8,6 +8,7 @@ export default class Card {
     this._showBigImage = handleCardClick;
     this._likes = data.likes;
     this._owner = data.owner;
+    this._myId = window.localStorage.getItem('_id');
   }
 
   _getTemplate() {
@@ -44,10 +45,18 @@ export default class Card {
 
   _isLike() {
     this._likes.find((element) => {
-      if (window.localStorage.getItem('_id') === element._id) {
+      if (this._myId === element._id) {
         return true;
       }
     });
+
+    return false;
+  }
+
+  _isMyCard() {
+    if(this._myId === this._owner._id) {
+      return true;
+    }
 
     return false;
   }
@@ -66,6 +75,11 @@ export default class Card {
 
     if (this._isLike()) {
       this._like.classList.add('places__like_active');
+    }
+
+    console.log(this._isMyCard())
+    if (this._isMyCard()) {
+      this._el.querySelector('.places__remove').classList.add('places__remove_visible');
     }
 
     this._setEventListeners();
