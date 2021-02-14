@@ -53,6 +53,16 @@ export default class Api {
     })
   }
 
+  _sendPutRequest(url) {
+    const fullUrl = `${this._url}/${url}`;
+    return fetch(fullUrl, {
+      method: 'PUT',
+      headers: this._headers,
+    }).then((res) => {
+      return this._check(res);
+    })
+  }
+
   getCardList() {
     return this._sendGetRequest('cards');
   }
@@ -73,5 +83,12 @@ export default class Api {
     return this._sendDeleteRequest(`cards/${cardId}`);
   }
 
+  addLike(cardId) {
+    return this._sendPutRequest(`cards/likes/${cardId}`);
+  }
+
+  deleteLike(cardId) {
+    return this._sendDeleteRequest(`cards/likes/${cardId}`);
+  }
 
 }

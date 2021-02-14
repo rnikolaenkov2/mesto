@@ -31,9 +31,39 @@ const api = new Api({
   }
 });
 
+function handleRemoveCard(cardId) {
+  document.querySelector('.popup__input_card-id').value = cardId;
+  popupDelCard.open();
+}
+
+function hanldleAddLikeCard(cardId) {
+  api.addLike(cardId)
+    .then((res) => {
+      render();
+      return res;
+    })
+    .catch((res) => {
+      console.log(res);
+    });
+
+
+}
+
+function hanldleDelLikeCard(cardId) {
+  api.deleteLike(cardId)
+    .then((res) => {
+      render();
+      return res;
+    })
+    .catch((res) => {
+      console.log(res);
+    });
+
+  render();
+}
 
 function createCard(data, cardSelector, popup, cardList) {
-  const card = new Card(data, cardSelector, popup, handleRemoveCard);
+  const card = new Card(data, cardSelector, popup, handleRemoveCard, hanldleAddLikeCard, hanldleDelLikeCard);
   const cardElement = card.generateCard();
   cardList.addElement(cardElement);
 }
@@ -87,15 +117,6 @@ const popupDelCard =new PopupWithForm({
 });
 
 popupDelCard.setEventListeners();
-
-function handleRemoveCard(cardId) {
-  document.querySelector('.popup__input_card-id').value = cardId;
-  popupDelCard.open();
-}
-// btnAddCard.addEventListener('click', () => {
-//   // addCardFormValidator.clearErrors();
-//   popupDelCard.open();
-// });
 
 //редактирование профиля
 const editProfileFormValidator = new FormValidator(validationConfig, formValidatorEditProfile);
