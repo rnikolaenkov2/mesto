@@ -21,12 +21,27 @@ export default class Api {
     })
   }
 
+  _sendPatchRequest(url, data) {
+    const fullUrl = `${this._url}/${url}`;
+    return fetch(fullUrl, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    }).then((res) => {
+      return this._check(res);
+    })
+  }
+
   getCardList() {
-    return this._sendGetRequest(`cards`);
+    return this._sendGetRequest('cards');
   }
 
   getProfile() {
-    return this._sendGetRequest(`users/me`);
+    return this._sendGetRequest('users/me');
+  }
+
+  editProfile(name, about) {
+    return this._sendPatchRequest('users/me', {name: name, about: about});
   }
 
 
