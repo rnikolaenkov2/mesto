@@ -1,10 +1,12 @@
 export default class Card {
 
   constructor (data, cardSelector, handleCardClick) {
+    console.log(data);
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
     this._showBigImage = handleCardClick;
+    this._likeCount = data.likes.length;
   }
 
   _getTemplate() {
@@ -48,6 +50,8 @@ export default class Card {
     this._img.alt = this._title;
 
     this._like = this._el.querySelector('.places__like');
+
+    this._el.querySelector('.places__like-count').textContent = this._likeCount;
 
     this._setEventListeners();
 

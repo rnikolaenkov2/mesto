@@ -123,6 +123,7 @@ function render() {
 
   cardListApi
     .then((data) => {
+      console.log(data);
       const cardList = new Section({
         items: data,
         renderer: (item) => {
@@ -131,7 +132,6 @@ function render() {
       }, cardContainerSelector);
 
       cardList.renderer();
-      // console.log(cardList.renderer());
     })
     .catch((res) => {
       console.log(res);
