@@ -32,6 +32,17 @@ export default class Api {
     })
   }
 
+  _sendPostRequest(url, data) {
+    const fullUrl = `${this._url}/${url}`;
+    return fetch(fullUrl, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    }).then((res) => {
+      return this._check(res);
+    })
+  }
+
   getCardList() {
     return this._sendGetRequest('cards');
   }
@@ -42,6 +53,10 @@ export default class Api {
 
   editProfile(name, about) {
     return this._sendPatchRequest('users/me', {name: name, about: about});
+  }
+
+  addCard(name, link) {
+    return this._sendPostRequest('cards', {name: name, link: link});
   }
 
 

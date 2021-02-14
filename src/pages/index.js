@@ -45,7 +45,19 @@ addCardFormValidator.enableValidation();
 const popupAddCard = new PopupWithForm({
   selectorPopup: '.popup_add-card',
   handleSubmitForm: (formData) => {
-    createCard(formData, cardSelector, popupWithImage.open.bind(popupWithImage))
+    const btnSave = document.querySelector('.popup_add-card').querySelector('.popup__btn-save');
+    btnSave.textContent = 'Сохранение...';
+    api.addCard(formData.name, formData.link)
+      .then((res) => {
+        render();
+      })
+      .then((res) => {
+        btnSave.textContent = 'Сохранить';
+      })
+      .catch((res) => {
+        console.log(res);
+        btnSave.textContent = 'Сохранить';
+      })
   }
 });
 
@@ -88,6 +100,7 @@ const popupEditProfile = new PopupWithForm({
       })
       .catch((res) => {
         console.log(res);
+        btnSave.textContent = 'Сохранить';
       });
   }
 });
@@ -104,21 +117,27 @@ btnProfileChange.addEventListener('click', () => {
 const popupWithImage = new PopupWithImage(popupImageSelector);
 popupWithImage.setEventListeners();
 
-const cardListApi = api.getCardList();
 
-cardListApi
-  .then((data) => {
-    const cardList = new Section({
-      items: data,
-      renderer: (item) => {
-        createCard(item, cardSelector, popupWithImage.open.bind(popupWithImage), cardList)
-      }
-    }, cardContainerSelector);
+function render() {
+  const cardListApi = api.getCardList();
 
-    cardList.renderer();
-  })
-  .catch((res) => {
-    console.log(res);
-  });
+  cardListApi
+    .then((data) => {
+      const cardList = new Section({
+        items: data,
+        renderer: (item) => {
+          createCard(item, cardSelector, popupWithImage.open.bind(popupWithImage), cardList)
+        }
+      }, cardContainerSelector);
+
+      cardList.renderer();
+      // console.log(cardList.renderer());
+    })
+    .catch((res) => {
+      console.log(res);
+    });
+  }
+
+  render();
 
 
