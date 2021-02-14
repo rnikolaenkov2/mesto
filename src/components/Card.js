@@ -12,7 +12,6 @@ export default class Card {
     this._owner = data.owner;
     this._myId = window.localStorage.getItem('_id');
     this._cardId = data._id;
-    console.log(data);
   }
 
   _getTemplate() {
@@ -23,12 +22,9 @@ export default class Card {
   _handlerLikeToggle() {
     if (this._like.classList.contains('places__like_active')) {
       this._delLikeCard(this._cardId);
-      // this._like.classList.remove('places__like_active');
     } else {
       this._addLikeCard(this._cardId);
-      // this._like.classList.add('places__like_active');
     }
-    // this._like.classList.toggle('places__like_active');
   }
 
   _handlerRemoveCard() {
@@ -89,7 +85,6 @@ export default class Card {
 
     this._el.querySelector('.places__like-count').textContent = this._likes.length;
 
-    console.log(this._isLike());
     if (this._isLike()) {
       this._like.classList.add('places__like_active');
     }

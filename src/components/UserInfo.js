@@ -14,8 +14,14 @@ export default class UserInfo {
   }
 
   setUserInfo({name, about, avatar}) {
-    this._elementName.textContent = name;
-    this._elementRole.textContent = about;
+    if (name !== undefined) {
+      this._elementName.textContent = name;
+    }
+
+    if (about !== undefined) {
+      this._elementRole.textContent = about;
+    }
+
     if (avatar !== undefined) {
       this._elementAva.setAttribute('src', avatar);
       this._elementAva.setAttribute('alt', name);

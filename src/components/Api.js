@@ -91,4 +91,8 @@ export default class Api {
     return this._sendDeleteRequest(`cards/likes/${cardId}`);
   }
 
+  editAvatar(link) {
+    return this._sendPatchRequest('users/me/avatar', {avatar: link});
+  }
+
 }

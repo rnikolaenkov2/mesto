@@ -22,6 +22,7 @@ const formValidatorAddCard = document.querySelector('.popup_add-card').querySele
 const btnAddCard = document.querySelector('.profile__btn-add-img');
 const formValidatorEditProfile = document.querySelector('.popup_edit-profile').querySelector('.popup__form');
 const btnProfileChange = document.querySelector('.profile__btn-change');
+const formAvatarUpload = document.querySelector('.popup_upload-avatar').querySelector('.popup__form');
 
 const api = new Api({
   url: apiConfig.url,
@@ -167,6 +168,35 @@ btnProfileChange.addEventListener('click', () => {
   popupEditProfile.addData(userInfoData);
   popupEditProfile.open()
 });
+
+//обновление аватарки
+const uploadAvatarFormValidator = new FormValidator(validationConfig, formAvatarUpload );
+uploadAvatarFormValidator.enableValidation();
+
+const popupUploadAvatar = new PopupWithForm({
+  selectorPopup: '.popup_upload-avatar',
+  handleSubmitForm:(formData) => {
+    const btnSave = document.querySelector('.popup_upload-avatar').querySelector('.popup__btn-save');
+    btnSave.textContent = 'Сохранение...';
+    api.editAvatar(formData.link)
+      .then((res) => {
+        userInfo.setUserInfo(res);
+      })
+      .catch((res) => {
+        console.log(res);
+
+      })
+      .finally(() => {
+        btnSave.textContent = 'Сохранить';
+      });
+  }
+});
+
+popupUploadAvatar.setEventListeners();
+document.querySelector('.profile__avatar-upload').addEventListener('click', () => {
+  uploadAvatarFormValidator.clearErrors();
+  popupUploadAvatar.open();
+})
 
 //рендер карточек
 const popupWithImage = new PopupWithImage(popupImageSelector);
