@@ -75,8 +75,7 @@ addCardFormValidator.enableValidation();
 const popupAddCard = new PopupWithForm({
   selectorPopup: '.popup_add-card',
   handleSubmitForm: (formData) => {
-    const btnSave = document.querySelector('.popup_add-card').querySelector('.popup__btn-save');
-    btnSave.textContent = 'Сохранение...';
+    popupAddCard.renderLoadingText('Сохранение...');
     api.addCard(formData.name, formData.link)
       .then((res) => {
         render();
@@ -85,7 +84,7 @@ const popupAddCard = new PopupWithForm({
         console.log(res);
       })
       .finally(() => {
-        btnSave.textContent = 'Сохранить';
+        popupAddCard.renderLoadingText('Сохранить');
       })
   }
 });
