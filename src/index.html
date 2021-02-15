@@ -18,16 +18,18 @@
 <main>
   <!-- profile -->
   <section class="profile root__section">
-    <img src="<%=require('./images/avatar.jpg')%>" alt="Жак-Ив Кусто" class="profile__avatar">
+    <a href="#" class="profile__avatar-upload">
+      <img src="" alt="" class="profile__avatar">
+    </a>
     <div class="profile__info">
       <div class="profile__info-wrap">
         <h1 class="profile__name">
-          Жак-Ив Кусто
+          <!-- Жак-Ив Кусто -->
         </h1>
         <button type="button" class="profile__btn-change root__link" aria-label="редактирование профиля"></button>
       </div>
       <p class="profile__role">
-        Исследователь океана
+        <!-- Исследователь океана -->
       </p>
     </div>
     <button type="button" class="profile__btn-add-img root__link" aria-label="добавление места"></button>
@@ -55,7 +57,7 @@
       <form action="#" class="popup__form" name="form-change-profile" novalidate>
         <input type="text" class="popup__input popup__input_func_name" aria-label="имя" value="" name="name" id="profile-name" required minlength="2" maxlength="40" placeholder="Имя">
         <span class="popup__error profile-name-error">Вы пропустили это поле</span>
-        <input type="text" class="popup__input popup__input_func_role" aria-label="роль" value="" name="role" id="profile-role" required minlength="2" maxlength="200" placeholder="Роль">
+        <input type="text" class="popup__input popup__input_func_role" aria-label="роль" value="" name="about" id="profile-role" required minlength="2" maxlength="200" placeholder="Роль">
         <span class="popup__error profile-role-error">Вы пропустили это поле</span>
         <button type="submit" class="popup__btn-save root__link">Сохранить</button>
       </form>
@@ -87,6 +89,33 @@
   </div>
 </div>
 
+<div class="popup popup_delete-card">
+  <div class="popup__container popup__container_theme_form">
+    <button type="button" class="popup__btn-close root__link" aria-label="закрыть попап"></button>
+    <div class="popup__content">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form action="#" class="popup__form popup__form_form-del-card" name="form-del-card" novalidate>
+        <input type="hidden" class="popup__input popup__input_card-id" value="" name="card-id" >
+        <button type="submit" class="popup__btn-save root__link">Да</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="popup popup_upload-avatar">
+  <div class="popup__container popup__container_theme_form">
+    <button type="button" class="popup__btn-close root__link" aria-label="закрыть попап"></button>
+    <div class="popup__content">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form action="#" class="popup__form popup__form_form-add-card" name="form-new-card" novalidate>
+        <input type="url" class="popup__input popup__input_link" aria-label="ссылка" value="" name="link" placeholder="Ссылка на картинку" id="new-card-link" required>
+        <span class="popup__error new-card-link-error">Вы пропустили это поле</span>
+        <button type="submit" class="popup__btn-save root__link">Сохранить</button>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- end modal -->
 
 <!-- template for card -->
@@ -96,7 +125,10 @@
     <img src="./images/no-image.jpg" alt="Нет картинки" class="places__img">
     <div class="places__title-wrap">
       <h2 class="places__title"></h2>
-      <button type="button" class="places__like root__link"></button>
+      <div class="places__like-wrap">
+        <button type="button" class="places__like root__link"></button>
+        <p class="places__like-count">0</p>
+      </div>
     </div>
   </li>
 </template>

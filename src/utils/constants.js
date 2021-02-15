@@ -38,3 +38,8 @@ export const validationConfig = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__btn-save',
 }
+
+export const apiConfig = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-20',
+  token: '87a20906-15d2-4ba8-8690-ee52e9ae8d47'
+}

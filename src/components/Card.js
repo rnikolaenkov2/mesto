@@ -1,10 +1,17 @@
 export default class Card {
 
-  constructor (data, cardSelector, handleCardClick) {
+  constructor (data, cardSelector, handleCardClick, handleDeleteCard, hanldleAddLikeCard, hanldleDelLikeCard) {
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
     this._showBigImage = handleCardClick;
+    this._removeCard = handleDeleteCard;
+    this._addLikeCard = hanldleAddLikeCard;
+    this._delLikeCard = hanldleDelLikeCard;
+    this._likes = data.likes;
+    this._owner = data.owner;
+    this._myId = window.localStorage.getItem('_id');
+    this._cardId = data._id;
   }
 
   _getTemplate() {
@@ -13,12 +20,17 @@ export default class Card {
   }
 
   _handlerLikeToggle() {
-    this._like.classList.toggle('places__like_active');
+    if (this._like.classList.contains('places__like_active')) {
+      this._delLikeCard(this._cardId);
+    } else {
+      this._addLikeCard(this._cardId);
+    }
   }
 
   _handlerRemoveCard() {
-    this._el.remove();
-    this._el = null;
+    this._removeCard(this._cardId);
+    // this._el.remove();
+    // this._el = null;
   }
 
   _handleImageClick() {
@@ -39,6 +51,28 @@ export default class Card {
     });
   }
 
+  _isLike() {
+    const res = this._likes.find((element) => {
+      if (this._myId == element._id) {
+        return true;
+      }
+    });
+
+    if (res !== undefined) {
+      return true;
+    }
+
+    return false;
+  }
+
+  _isMyCard() {
+    if(this._myId === this._owner._id) {
+      return true;
+    }
+
+    return false;
+  }
+
   generateCard() {
     this._el = this._getTemplate();
     this._el.querySelector('.places__title').textContent = this._title;
@@ -48,6 +82,16 @@ export default class Card {
     this._img.alt = this._title;
 
     this._like = this._el.querySelector('.places__like');
+
+    this._el.querySelector('.places__like-count').textContent = this._likes.length;
+
+    if (this._isLike()) {
+      this._like.classList.add('places__like_active');
+    }
+
+    if (this._isMyCard()) {
+      this._el.querySelector('.places__remove').classList.add('places__remove_visible');
+    }
 
     this._setEventListeners();
 
