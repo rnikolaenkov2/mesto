@@ -44,7 +44,8 @@ function handleRemoveCard(cardId, element) {
 function hanldleAddLikeCard(cardId, thisCard) {
   api.addLike(cardId)
     .then((res) => {
-      thisCard.setLikeCount(res.likes.length);
+      thisCard.updateLikeCount(res.likes.length);
+      thisCard.isLike(res.likes);
       return res;
     })
     .catch((res) => {
@@ -55,7 +56,8 @@ function hanldleAddLikeCard(cardId, thisCard) {
 function hanldleDelLikeCard(cardId, thisCard) {
   api.deleteLike(cardId)
     .then((res) => {
-      thisCard.setLikeCount(res.likes.length);
+      thisCard.updateLikeCount(res.likes.length);
+      thisCard.isLike(res.likes);
       return res;
     })
     .catch((res) => {

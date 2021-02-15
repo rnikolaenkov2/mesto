@@ -53,20 +53,6 @@ export default class Card {
     });
   }
 
-  _isLike() {
-    const res = this._likes.find((element) => {
-      if (this._myId == element._id) {
-        return true;
-      }
-    });
-
-    if (res !== undefined) {
-      return true;
-    }
-
-    return false;
-  }
-
   _isMyCard() {
     if(this._myId === this._owner._id) {
       return true;
@@ -75,7 +61,21 @@ export default class Card {
     return false;
   }
 
-  setLikeCount(count) {
+  isLike(likes) {
+    const res = likes.find((element) => {
+      if (this._myId == element._id) {
+        return true;
+      }
+    });
+
+    if (res !== undefined) {
+      this._like.classList.add('places__like_active');
+    } else {
+      this._like.classList.remove('places__like_active');
+    }
+  }
+
+  updateLikeCount(count) {
     this._el.querySelector('.places__like-count').textContent = count;
   }
 
@@ -89,11 +89,9 @@ export default class Card {
 
     this._like = this._el.querySelector('.places__like');
 
-    this.setLikeCount(this._likes.length);
+    this.updateLikeCount(this._likes.length);
 
-    if (this._isLike()) {
-      this._like.classList.add('places__like_active');
-    }
+    this.isLike(this._likes)
 
     if (this._isMyCard()) {
       this._el.querySelector('.places__remove').classList.add('places__remove_visible');
