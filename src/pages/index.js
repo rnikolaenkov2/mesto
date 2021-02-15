@@ -24,6 +24,8 @@ const formValidatorEditProfile = document.querySelector('.popup_edit-profile').q
 const btnProfileChange = document.querySelector('.profile__btn-change');
 const formAvatarUpload = document.querySelector('.popup_upload-avatar').querySelector('.popup__form');
 
+let cardToDelete;
+
 const api = new Api({
   url: apiConfig.url,
   headers: {
@@ -33,7 +35,7 @@ const api = new Api({
 });
 
 function handleRemoveCard(cardId) {
-  document.querySelector('.popup__input_card-id').value = cardId;
+  cardToDelete = cardId;
   popupDelCard.open();
 }
 
@@ -98,9 +100,9 @@ btnAddCard.addEventListener('click', () => {
 //удаление карточки
 const popupDelCard =new PopupWithForm({
   selectorPopup: '.popup_delete-card',
-  handleSubmitForm:(formData) => {
+  handleSubmitForm:() => {
     popupDelCard.renderLoadingText('Сохранение...');
-    api.deleteCard(formData['card-id'])
+    api.deleteCard(cardToDelete)
     .then(() => {
       render();
     })
