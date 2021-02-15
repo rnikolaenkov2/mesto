@@ -46,8 +46,6 @@ function hanldleAddLikeCard(cardId) {
     .catch((res) => {
       console.log(res);
     });
-
-
 }
 
 function hanldleDelLikeCard(cardId) {
@@ -102,8 +100,7 @@ btnAddCard.addEventListener('click', () => {
 const popupDelCard =new PopupWithForm({
   selectorPopup: '.popup_delete-card',
   handleSubmitForm:(formData) => {
-    const btnSave = document.querySelector('.popup_delete-card').querySelector('.popup__btn-save');
-    btnSave.textContent = 'Сохранение...';
+    popupDelCard.renderLoadingText('Сохранение...');
     api.deleteCard(formData['card-id'])
     .then(() => {
       render();
@@ -112,7 +109,7 @@ const popupDelCard =new PopupWithForm({
       console.log(res);
     })
     .finally(() => {
-      btnSave.textContent = 'Да';
+      popupDelCard.renderLoadingText('Да');
     });
   }
 });
@@ -145,18 +142,16 @@ userInfoApi
 const popupEditProfile = new PopupWithForm({
   selectorPopup: '.popup_edit-profile',
   handleSubmitForm: (formData) => {
-    const btnSave = document.querySelector('.popup_edit-profile').querySelector('.popup__btn-save');
-    btnSave.textContent = 'Сохранение...';
+    popupEditProfile.renderLoadingText('Сохранение...');
     api.editProfile(formData.name, formData.about)
       .then((res) => {
         userInfo.setUserInfo(res);
       })
       .catch((res) => {
         console.log(res);
-
       })
       .finally(() => {
-        btnSave.textContent = 'Сохранить';
+        popupEditProfile.renderLoadingText('Сохранить');
       });
   }
 });
@@ -176,8 +171,7 @@ uploadAvatarFormValidator.enableValidation();
 const popupUploadAvatar = new PopupWithForm({
   selectorPopup: '.popup_upload-avatar',
   handleSubmitForm:(formData) => {
-    const btnSave = document.querySelector('.popup_upload-avatar').querySelector('.popup__btn-save');
-    btnSave.textContent = 'Сохранение...';
+    popupUploadAvatar.renderLoadingText('Сохранение...');
     api.editAvatar(formData.link)
       .then((res) => {
         userInfo.setUserInfo(res);
@@ -187,7 +181,7 @@ const popupUploadAvatar = new PopupWithForm({
 
       })
       .finally(() => {
-        btnSave.textContent = 'Сохранить';
+        popupUploadAvatar.renderLoadingText('Сохранить');
       });
   }
 });
@@ -220,8 +214,6 @@ function render() {
     .catch((res) => {
       console.log(res);
     });
-  }
+}
 
-  render();
-
-
+render();

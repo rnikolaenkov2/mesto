@@ -4,6 +4,11 @@ export default class Popup {
     this._closePopupBtn = this._popup.querySelector('.popup__btn-close');
     this._handleEscClose = this._handleEscClose.bind(this);
     this._handleClickWithoutClose = this._handleClickWithoutClose.bind(this);
+    this._submit = this._popup.querySelector('.popup__btn-save');
+  }
+
+  renderLoadingText(text) {
+    this._submit.textContent = text;
   }
 
   _handleEscClose(e) {
