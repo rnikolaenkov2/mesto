@@ -197,24 +197,16 @@ document.querySelector('.profile__avatar-upload').addEventListener('click', () =
 const popupWithImage = new PopupWithImage(popupImageSelector);
 popupWithImage.setEventListeners();
 
+const cardListApi = api.getCardList();
+const cardList = new Section(cardContainerSelector, function(item) {
+  createCard(item, cardSelector, popupWithImage.open.bind(popupWithImage), cardList);
+});
 
-function render() {
-  const cardListApi = api.getCardList();
+cardListApi
+  .then((data) => {
+    cardList.renderer(data);
+  })
+  .catch((res) => {
+    console.log(res);
+  });
 
-  cardListApi
-    .then((data) => {
-      const cardList = new Section({
-        items: data,
-        renderer: (item) => {
-          createCard(item, cardSelector, popupWithImage.open.bind(popupWithImage), cardList)
-        }
-      }, cardContainerSelector);
-
-      cardList.renderer();
-    })
-    .catch((res) => {
-      console.log(res);
-    });
-}
-
-render();
