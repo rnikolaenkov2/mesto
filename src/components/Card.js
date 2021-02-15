@@ -1,7 +1,6 @@
 export default class Card {
 
   constructor (cardSelector, {data, handlers}) {
-    // handleCardClick, handleDeleteCard, hanldleAddLikeCard, hanldleDelLikeCard
     this._cardSelector = cardSelector;
 
     this._title = data.name;
@@ -15,8 +14,6 @@ export default class Card {
     this._removeCard = handlers.handleDeleteCard;
     this._addLikeCard = handlers.hanldleAddLikeCard;
     this._delLikeCard = handlers.hanldleDelLikeCard;
-    // this._likes = data.likes;
-    // this._likes = data.likes;
   }
 
   _getTemplate() {
@@ -33,9 +30,7 @@ export default class Card {
   }
 
   _handlerRemoveCard() {
-    this._removeCard(this._cardId);
-    // this._el.remove();
-    // this._el = null;
+    this._removeCard(this._cardId, this._el);
   }
 
   _handleImageClick() {

@@ -26,6 +26,7 @@ const formAvatarUpload = document.querySelector('.popup_upload-avatar').querySel
 
 let cardToDelete;
 let cardListArray;
+let elementToDelete;
 
 const api = new Api({
   url: apiConfig.url,
@@ -35,8 +36,9 @@ const api = new Api({
   }
 });
 
-function handleRemoveCard(cardId) {
+function handleRemoveCard(cardId, element) {
   cardToDelete = cardId;
+  elementToDelete = element;
   popupDelCard.open();
 }
 
@@ -54,7 +56,7 @@ function hanldleAddLikeCard(cardId) {
 function hanldleDelLikeCard(cardId) {
   api.deleteLike(cardId)
     .then((res) => {
-      render();
+
       return res;
     })
     .catch((res) => {
@@ -65,7 +67,6 @@ function hanldleDelLikeCard(cardId) {
 }
 
 function createCard(data, cardSelector, popup, cardList) {
-  // console.log(cardList);
   const handlers = {
     'handleCardClick': popup,
     'handleDeleteCard': handleRemoveCard,
@@ -90,9 +91,6 @@ const popupAddCard = new PopupWithForm({
     api.addCard(formData.name, formData.link)
       .then((res) => {
         createCard(res, cardSelector, popupWithImage.open.bind(popupWithImage), cardList);
-        // cardListArray.push(res);
-        // console.log(cardListArray);
-        // render();
       })
       .catch((res) => {
         console.log(res);
@@ -115,8 +113,8 @@ const popupDelCard =new PopupWithForm({
   handleSubmitForm:() => {
     popupDelCard.renderLoadingText('Сохранение...');
     api.deleteCard(cardToDelete)
-    .then(() => {
-      render();
+    .then((res) => {
+      elementToDelete.remove();
     })
     .catch((res) => {
       console.log(res);
