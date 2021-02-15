@@ -23,9 +23,11 @@ export default class Card {
 
   _handlerLikeToggle() {
     if (this._like.classList.contains('places__like_active')) {
-      this._delLikeCard(this._cardId);
+      this._like.classList.remove('places__like_active');
+      this._delLikeCard(this._cardId, this);
     } else {
-      this._addLikeCard(this._cardId);
+      this._like.classList.add('places__like_active');
+      this._addLikeCard(this._cardId, this);
     }
   }
 
@@ -73,6 +75,10 @@ export default class Card {
     return false;
   }
 
+  setLikeCount(count) {
+    this._el.querySelector('.places__like-count').textContent = count;
+  }
+
   generateCard() {
     this._el = this._getTemplate();
     this._el.querySelector('.places__title').textContent = this._title;
@@ -83,7 +89,7 @@ export default class Card {
 
     this._like = this._el.querySelector('.places__like');
 
-    this._el.querySelector('.places__like-count').textContent = this._likes.length;
+    this.setLikeCount(this._likes.length);
 
     if (this._isLike()) {
       this._like.classList.add('places__like_active');

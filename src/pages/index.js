@@ -25,7 +25,6 @@ const btnProfileChange = document.querySelector('.profile__btn-change');
 const formAvatarUpload = document.querySelector('.popup_upload-avatar').querySelector('.popup__form');
 
 let cardToDelete;
-let cardListArray;
 let elementToDelete;
 
 const api = new Api({
@@ -42,10 +41,10 @@ function handleRemoveCard(cardId, element) {
   popupDelCard.open();
 }
 
-function hanldleAddLikeCard(cardId) {
+function hanldleAddLikeCard(cardId, thisCard) {
   api.addLike(cardId)
     .then((res) => {
-      render();
+      thisCard.setLikeCount(res.likes.length);
       return res;
     })
     .catch((res) => {
@@ -53,17 +52,15 @@ function hanldleAddLikeCard(cardId) {
     });
 }
 
-function hanldleDelLikeCard(cardId) {
+function hanldleDelLikeCard(cardId, thisCard) {
   api.deleteLike(cardId)
     .then((res) => {
-
+      thisCard.setLikeCount(res.likes.length);
       return res;
     })
     .catch((res) => {
       console.log(res);
     });
-
-  render();
 }
 
 function createCard(data, cardSelector, popup, cardList) {
@@ -214,7 +211,6 @@ const cardList = new Section(cardContainerSelector, function(item) {
 
 cardListApi
   .then((data) => {
-    cardListArray = data;
     cardList.renderer(data);
   })
   .catch((res) => {
