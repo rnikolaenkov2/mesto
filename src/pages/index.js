@@ -24,6 +24,9 @@ const formValidatorEditProfile = document.querySelector('.popup_edit-profile').q
 const btnProfileChange = document.querySelector('.profile__btn-change');
 const formAvatarUpload = document.querySelector('.popup_upload-avatar').querySelector('.popup__form');
 
+let cardToDelete;
+let elementToDelete;
+
 const api = new Api({
   url: apiConfig.url,
   headers: {
@@ -32,15 +35,17 @@ const api = new Api({
   }
 });
 
-function handleRemoveCard(cardId) {
-  document.querySelector('.popup__input_card-id').value = cardId;
+function handleRemoveCard(cardId, element) {
+  cardToDelete = cardId;
+  elementToDelete = element;
   popupDelCard.open();
 }
 
-function hanldleAddLikeCard(cardId) {
+function hanldleAddLikeCard(cardId, thisCard) {
   api.addLike(cardId)
     .then((res) => {
-      render();
+      thisCard.updateLikeCount(res.likes.length);
+      thisCard.isLike(res.likes);
       return res;
     })
     .catch((res) => {
@@ -48,21 +53,27 @@ function hanldleAddLikeCard(cardId) {
     });
 }
 
-function hanldleDelLikeCard(cardId) {
+function hanldleDelLikeCard(cardId, thisCard) {
   api.deleteLike(cardId)
     .then((res) => {
-      render();
+      thisCard.updateLikeCount(res.likes.length);
+      thisCard.isLike(res.likes);
       return res;
     })
     .catch((res) => {
       console.log(res);
     });
-
-  render();
 }
 
 function createCard(data, cardSelector, popup, cardList) {
-  const card = new Card(data, cardSelector, popup, handleRemoveCard, hanldleAddLikeCard, hanldleDelLikeCard);
+  const handlers = {
+    'handleCardClick': popup,
+    'handleDeleteCard': handleRemoveCard,
+    'hanldleAddLikeCard': hanldleAddLikeCard,
+    'hanldleDelLikeCard': hanldleDelLikeCard
+  };
+
+  const card = new Card(cardSelector, { data, handlers});
   const cardElement = card.generateCard();
   cardList.addElement(cardElement);
 }
@@ -75,17 +86,16 @@ addCardFormValidator.enableValidation();
 const popupAddCard = new PopupWithForm({
   selectorPopup: '.popup_add-card',
   handleSubmitForm: (formData) => {
-    const btnSave = document.querySelector('.popup_add-card').querySelector('.popup__btn-save');
-    btnSave.textContent = 'Сохранение...';
+    popupAddCard.renderLoadingText('Сохранение...');
     api.addCard(formData.name, formData.link)
       .then((res) => {
-        render();
+        createCard(res, cardSelector, popupWithImage.open.bind(popupWithImage), cardList);
       })
       .catch((res) => {
         console.log(res);
       })
       .finally(() => {
-        btnSave.textContent = 'Сохранить';
+        popupAddCard.renderLoadingText('Сохранить');
       })
   }
 });
@@ -99,11 +109,11 @@ btnAddCard.addEventListener('click', () => {
 //удаление карточки
 const popupDelCard =new PopupWithForm({
   selectorPopup: '.popup_delete-card',
-  handleSubmitForm:(formData) => {
+  handleSubmitForm:() => {
     popupDelCard.renderLoadingText('Сохранение...');
-    api.deleteCard(formData['card-id'])
-    .then(() => {
-      render();
+    api.deleteCard(cardToDelete)
+    .then((res) => {
+      elementToDelete.remove();
     })
     .catch((res) => {
       console.log(res);
@@ -196,24 +206,16 @@ document.querySelector('.profile__avatar-upload').addEventListener('click', () =
 const popupWithImage = new PopupWithImage(popupImageSelector);
 popupWithImage.setEventListeners();
 
+const cardListApi = api.getCardList();
+const cardList = new Section(cardContainerSelector, function(item) {
+  createCard(item, cardSelector, popupWithImage.open.bind(popupWithImage), cardList);
+});
 
-function render() {
-  const cardListApi = api.getCardList();
+cardListApi
+  .then((data) => {
+    cardList.renderer(data);
+  })
+  .catch((res) => {
+    console.log(res);
+  });
 
-  cardListApi
-    .then((data) => {
-      const cardList = new Section({
-        items: data,
-        renderer: (item) => {
-          createCard(item, cardSelector, popupWithImage.open.bind(popupWithImage), cardList)
-        }
-      }, cardContainerSelector);
-
-      cardList.renderer();
-    })
-    .catch((res) => {
-      console.log(res);
-    });
-}
-
-render();

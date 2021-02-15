@@ -43,6 +43,6 @@ export default class Popup {
       this._handleClose();
     });
 
-    window.addEventListener('click', this._handleClickWithoutClose);
+    this._popup.addEventListener('click', this._handleClickWithoutClose);
   }
 }
