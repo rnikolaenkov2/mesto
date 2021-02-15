@@ -25,6 +25,7 @@ const btnProfileChange = document.querySelector('.profile__btn-change');
 const formAvatarUpload = document.querySelector('.popup_upload-avatar').querySelector('.popup__form');
 
 let cardToDelete;
+let cardListArray;
 
 const api = new Api({
   url: apiConfig.url,
@@ -64,7 +65,15 @@ function hanldleDelLikeCard(cardId) {
 }
 
 function createCard(data, cardSelector, popup, cardList) {
-  const card = new Card(data, cardSelector, popup, handleRemoveCard, hanldleAddLikeCard, hanldleDelLikeCard);
+  // console.log(cardList);
+  const handlers = {
+    'handleCardClick': popup,
+    'handleDeleteCard': handleRemoveCard,
+    'hanldleAddLikeCard': hanldleAddLikeCard,
+    'hanldleDelLikeCard': hanldleDelLikeCard
+  };
+
+  const card = new Card(cardSelector, { data, handlers});
   const cardElement = card.generateCard();
   cardList.addElement(cardElement);
 }
@@ -80,7 +89,10 @@ const popupAddCard = new PopupWithForm({
     popupAddCard.renderLoadingText('Сохранение...');
     api.addCard(formData.name, formData.link)
       .then((res) => {
-        render();
+        createCard(res, cardSelector, popupWithImage.open.bind(popupWithImage), cardList);
+        // cardListArray.push(res);
+        // console.log(cardListArray);
+        // render();
       })
       .catch((res) => {
         console.log(res);
@@ -204,6 +216,7 @@ const cardList = new Section(cardContainerSelector, function(item) {
 
 cardListApi
   .then((data) => {
+    cardListArray = data;
     cardList.renderer(data);
   })
   .catch((res) => {

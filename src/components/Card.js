@@ -1,17 +1,22 @@
 export default class Card {
 
-  constructor (data, cardSelector, handleCardClick, handleDeleteCard, hanldleAddLikeCard, hanldleDelLikeCard) {
+  constructor (cardSelector, {data, handlers}) {
+    // handleCardClick, handleDeleteCard, hanldleAddLikeCard, hanldleDelLikeCard
+    this._cardSelector = cardSelector;
+
     this._title = data.name;
     this._image = data.link;
-    this._cardSelector = cardSelector;
-    this._showBigImage = handleCardClick;
-    this._removeCard = handleDeleteCard;
-    this._addLikeCard = hanldleAddLikeCard;
-    this._delLikeCard = hanldleDelLikeCard;
     this._likes = data.likes;
     this._owner = data.owner;
-    this._myId = window.localStorage.getItem('_id');
     this._cardId = data._id;
+    this._myId = window.localStorage.getItem('_id');
+
+    this._showBigImage = handlers.handleCardClick;
+    this._removeCard = handlers.handleDeleteCard;
+    this._addLikeCard = handlers.hanldleAddLikeCard;
+    this._delLikeCard = handlers.hanldleDelLikeCard;
+    // this._likes = data.likes;
+    // this._likes = data.likes;
   }
 
   _getTemplate() {
