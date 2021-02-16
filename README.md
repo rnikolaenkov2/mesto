@@ -12,4 +12,4 @@
 * Методология БЭМ
 
 **GitHub Pages**
-* [Ссылка на GitHub Pages](https://rnikolaenkov2.github.io/mesto/)
+* [Ссылка на GitHub Pages](https://rnikolaenkov2.github.io/mesto/index.html)
